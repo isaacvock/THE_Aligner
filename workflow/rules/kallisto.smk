@@ -14,14 +14,17 @@ rule index:
 rule quant:
     input:
         fastq=expand("results/trimmed/{{sample}}.{read}.fastq", read = READS),
-        index=config["index"]
+        index=INDEX_KALLISTO
     output:
-        directory("results/kallisto_quant/{sample}")
+        dir=directory("results/kallisto_quant/{sample}")
+        run_info="results/kallisto_quant/{sample}/run_info.json"
     params:
         extra=config["kallisto_quant_params"],
     log:
         "logs/kallisto_quant/{sample}.log"
+    conda:
+        "../envs/kallisto.yaml"
     threads: 12
-    wrapper:
-        "v2.6.0/bio/kallisto/quant"
+    script:
+        "../scripts/kallisto-quant.py"
     

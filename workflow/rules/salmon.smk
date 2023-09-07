@@ -22,7 +22,7 @@ rule index:
         ),
     log:
         "logs/index/salmon_index.log"
-    threads: 10
+    threads: 16 # Borrowed from vignette here: https://combine-lab.github.io/alevin-fry-tutorials/2021/improving-txome-specificity/
     params:
         extra=config["salmon_index_params"]
     wrapper:
@@ -45,7 +45,7 @@ if config["PE"]:
         params:
             libtype=LIBTYPE
             extra=config["salmon_quant_params"]
-        threads: 10
+        threads: 12 # See https://salmon.readthedocs.io/en/latest/salmon.html Note for motivation
         wrapper:
             "v2.6.0/bio/salmon/quant"
 
@@ -63,7 +63,7 @@ else:
         params:
             libtype=LIBTYPE
             extra=config["salmon_quant_params"]
-        threads: 10
+        threads: 12
         wrapper:
             "v2.6.0/bio/salmon/quant"
 

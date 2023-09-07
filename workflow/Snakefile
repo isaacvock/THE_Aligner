@@ -39,7 +39,7 @@ if config["aligner"] == "bowtie2":
     include: "rules/bowtie2.smk"
 
 if config["aligner"] == "star":
-    include: "rules/bowtie2.smk"
+    include: "rules/star.smk"
 
 if config["aligner"] == "hisat2":
     include: "rules/hisat2.smk"

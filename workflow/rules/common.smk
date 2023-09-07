@@ -4,17 +4,6 @@ import glob
 # and to aid in defining wildcards
 SAMP_NAMES = list(config['samples'].keys())
 
-# If PROseq method, use groseq peaks finding style in HOMER
-if config["findPeaks_style"] == "groseq":
-    PEAK_TYPE = "transcripts"
-else: # Else, use peaks
-    PEAK_TYPE = "peaks"
-
-# Need to figure out which sample names are enrichments and which are inputs
-    # Treatment = enrichment
-if config["method"] == "ChIPseq":
-    TREATMENT_NAMES = list(config['controls'].keys())
-
 # Determine how many fastqs to look for
 if config["PE"]:
     READS = [1, 2]
@@ -62,10 +51,4 @@ for p in fastq_paths.values():
     test_gz = any(path.endswith('.fastq.gz') for path in fastqs)
     is_gz = any([is_gz, test_gz])
 
-
-# MACS2 peak calling -f parameter
-if config["PE"]:
-    macs2_params = config["callpeaks_params"] + " -f BAMPE"
-else:
-    macs2_params = config["callpeaks_params"]
 

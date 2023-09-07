@@ -156,7 +156,16 @@ star_index_params: "--sjdbOverhang 100"
   # --sjdbGTFfile is automatically set to be the provided annotation file
 star_align_params: "--outSAMtype BAM SortedByCoordinate --outSAMattributes NH HI AS NM MD --quantMode TranscriptomeSAM GeneCounts"
 
-# reads per gene 
+
+
+##### HISAT2 PARAMETERS #####
+
+# Optional parameters to set for hisat2 indexing
+hisat2_index_params: ""
+
+# Optional parmaeters to set for hisat2 alignment
+hisat2_align_params: ""
+
 
 
 ##### KALLISTO PARAMETERS #####

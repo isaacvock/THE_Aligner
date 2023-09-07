@@ -6,7 +6,7 @@ rule index:
         directory(config['index']),
     threads: 12
     params:
-        extra="--sjdbGTFfile {} --sjdbOverhang 100".format(str(config["annotation"])),
+        extra="--sjdbGTFfile {gtf} {extra}".format(gtf = str(config["annotation"]), extra = config["star_index_params"]),
     log:
         "logs/star_index_genome.log",
     wrapper:
@@ -26,8 +26,8 @@ rule align:
         "logs/bams/{sample}.log",
     params:
         idx=lambda wc, input: input.index,
-        extra="--outSAMtype BAM SortedByCoordinate --outSAMattributes NH HI AS NM MD --quantMode TranscriptomeSAM GeneCounts --sjdbGTFfile {} {}".format(
-            str(config["annotation"]), config["star_extra"]
+        extra="--sjdbGTFfile {} {}".format(
+            str(config["annotation"]), config["star_align_params"]
         ),
     conda:
         "../envs/star.yaml"

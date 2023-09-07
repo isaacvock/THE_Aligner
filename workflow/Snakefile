@@ -77,8 +77,7 @@ elif config["aligner"] == "kallisto":
         input:
             expand("results/fastqc/{SID}_{read}.html", SID = SAMP_NAMES, read = READ_NAMES),
             expand("results/fastqc/{SID}_{read}_fastqc.zip", SID = SAMP_NAMES, read = READ_NAMES),
-            expand("results/quant/{SID}/quant.sf", SID = SAMP_NAMES),
-            expand("results/quant/{SID}/lib_format_counts.json", SID = SAMP_NAMES)
+            expand("results/kallisto_quant/{SID}/run_info.json", SID = SAMP_NAMES)
 
 else:
 

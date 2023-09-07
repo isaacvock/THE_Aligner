@@ -1,16 +1,16 @@
 rule index:
     input:
         fasta=config["genome"],
-        annotation=config["annotation"],
+        gtf=config["annotation"],
     output:
         directory(config['index']),
     threads: 12
     params:
-        extra="{gtf} {extra}".format(gtf = SJ_DB_GTF, extra = config["star_index_params"]),
+        extra=config["star_index_params"],
     log:
         "logs/star_index_genome.log",
     wrapper:
-        "v1.25.0/bio/star/index"
+        "v2.6.0/bio/star/index"
 
 
 rule align:

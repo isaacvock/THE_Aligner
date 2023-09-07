@@ -29,10 +29,38 @@ container: "docker://continuumio/miniconda3"
 
 ##### load rules #####
 include: "rules/common.smk"
-include: "rules/preprocess.smk"
-include: "rules/align.smk"
+include: "rules/postprocess.smk"
+
+if config["aligner"] == "bwa-mem2":
+    include: "rules/bwamem2.smk"
+
+if config["aligner"] == "bowtie2":
+    include: "rules/bowtie2.smk"
+
+if config["aligner"] == "star":
+    include: "rules/bowtie2.smk"
+
+if config["aligner"] == "hisat2":
+    include: "rules/hisat2.smk"
+
+if config["aligner"] == "hisat3n":
+    include: "rules/hisat3n.smk"
+
+if config["aligner"] == "bismark":
+    include: "rules/bisamrk.smk"
+
+if config["aligner"] == "kallisto":
+    include: "rules/kallisto.smk"
+
+if config["aligner"] == "salmon":
+    include: "rules/salmon.smk"
 
 
 
 ##### Target rule ######
 
+rule all:
+    input:
+        expand("results/fastqc/{SID}_{read}.html", SID = SAMP_NAMES, read = READ_NAMES),
+        expand("results/fastqc/{SID}_{read}_fastqc.zip", SID = SAMP_NAMES, read = READ_NAMES),
+        expand("results/alignment_stats/{SID}.bamstats", SID = SAMP_NAMES)

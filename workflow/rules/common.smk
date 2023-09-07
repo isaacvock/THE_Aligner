@@ -124,6 +124,15 @@ else:
 
 ### STAR EXTRA OUTPUT DECLARATION
 
+# Use GTF for indexing to identify splice junctions
+if config["annotation"]:
+
+    SJ_DB_GTF = "--sjdbGTFfile {}".format(str(config["annotation"]))
+
+else:
+
+    SJ_DB_GTF = ""
+
 # Transcriptome alignment
 def get_aln_tx(wildcards):
 

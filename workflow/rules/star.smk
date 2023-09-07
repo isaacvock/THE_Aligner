@@ -6,7 +6,7 @@ rule index:
         directory(config['index']),
     threads: 12
     params:
-        extra="--sjdbGTFfile {gtf} {extra}".format(gtf = str(config["annotation"]), extra = config["star_index_params"]),
+        extra="{gtf} {extra}".format(gtf = SJ_DB_GTF, extra = config["star_index_params"]),
     log:
         "logs/star_index_genome.log",
     wrapper:
@@ -31,8 +31,8 @@ rule align:
         "logs/bams/{sample}.log",
     params:
         idx=lambda wc, input: input.index,
-        extra="--sjdbGTFfile {} {}".format(
-            str(config["annotation"]), config["star_align_params"]
+        extra="{} {}".format(
+            SJ_DB_GTF, config["star_align_params"]
         ),
     conda:
         "../envs/star.yaml"

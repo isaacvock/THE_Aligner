@@ -1,15 +1,15 @@
 import glob
 import os
 
+
+### GENERAL HELPER FUNCTIONS/VARIABLES USED IN ALL CASES
+
 # Sample names to help expanding lists of all bam files
 # and to aid in defining wildcards
 SAMP_NAMES = list(config['samples'].keys())
 
 # Directory containing index; used in case of certain aligners
 INDEX_DIR = config["index"]
-
-# Path to index for kallisto
-INDEX_KALLISTO = os.path.join(INDEX_DIR, "transcriptome.idx")
 
 # Determine how many fastqs to look for
 if config["PE"]:
@@ -19,6 +19,34 @@ else:
     READS = [1]
     READ_NAMES = ['r1']
 
+# Get input fastq files for first step
+def get_input_fastqs(wildcards):
+    fastq_path = config["samples"][wildcards.sample]
+    fastq_files = sorted(glob.glob(f"{fastq_path}/*.fastq*"))
+    return fastq_files
+
+# Check if fastq files are gzipped
+fastq_paths = config["samples"]
+
+is_gz = False
+
+for p in fastq_paths.values():
+
+    fastqs = sorted(glob.glob(f"{p}/*.fastq*"))
+    test_gz = any(path.endswith('.fastq.gz') for path in fastqs)
+    is_gz = any([is_gz, test_gz])
+
+
+
+
+### KALLISTO HELPERS
+
+# Path to index for kallisto
+INDEX_KALLISTO = os.path.join(INDEX_DIR, "transcriptome.idx")
+
+
+
+### STAR AND SALMON HELPERS
 
 # Trimmed fastq file paths, used as input for aligners
 
@@ -43,6 +71,9 @@ def get_fastq_r2(wildcards):
         return ""
 
 
+
+### BOWTIE2 HELPERS
+
 # Bowtie2 has two different alignment index suffixes, so gotta figure out which will apply
 if config["aligner"] == "bowtie2":
 
@@ -50,6 +81,9 @@ if config["aligner"] == "bowtie2":
         INDEX_SUFFIX = "21"
     else:
         INDEX_SUFFIX = "2"
+
+
+### BOWTIE AND BWA-MEM2 HELPERS
 
 # Make life easier for users and catch if they add a '/' at the end of their path
 # to alignment indices. If so, remove it to avoid double '/' 
@@ -59,22 +93,9 @@ if config["indices"].endswith('/'):
 else:
     INDEX_PATH = str(config["indices"])
 
-# Get input fastq files for first step
-def get_input_fastqs(wildcards):
-    fastq_path = config["samples"][wildcards.sample]
-    fastq_files = sorted(glob.glob(f"{fastq_path}/*.fastq*"))
-    return fastq_files
 
-# Check if fastq files are gzipped
-fastq_paths = config["samples"]
 
-is_gz = False
-
-for p in fastq_paths.values():
-
-    fastqs = sorted(glob.glob(f"{p}/*.fastq*"))
-    test_gz = any(path.endswith('.fastq.gz') for path in fastqs)
-    is_gz = any([is_gz, test_gz])
+### SALMON HELPERS
 
 # Libtype string if using salmon
 if config["PE"]:
@@ -122,7 +143,7 @@ else:
 
 
 
-### STAR EXTRA OUTPUT DECLARATION
+### STAR HELPERS
 
 # Use GTF for indexing to identify splice junctions
 if config["annotation"]:

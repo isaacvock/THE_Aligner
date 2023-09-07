@@ -20,6 +20,18 @@ else:
     READ_NAMES = ['r1']
 
 
+# Trimmed fastq file paths, used as input for aligners
+if config["PE"]:
+
+    FASTQ_R1 = "results/trimmed/{sample}.1.fastq"
+    FASTQ_R2 = "results/trimmed/{sample}.2.fastq"
+
+else:
+
+    FASTQ_R1 = "results/trimmed/{sample}.fastq"
+    FASTQ_R2 = ""
+
+
 # Bowtie2 has two different alignment index suffixes, so gotta figure out which will apply
 if config["aligner"] == "bowtie2":
 
@@ -41,31 +53,6 @@ def get_input_fastqs(wildcards):
     fastq_path = config["samples"][wildcards.sample]
     fastq_files = sorted(glob.glob(f"{fastq_path}/*.fastq*"))
     return fastq_files
-
-## Get reads individually
-if config["PE"]:
-
-    def get_input_r1(wildcards):
-        fastq_path = config["samples"][wildcards.sample]
-        fastq_files = sorted(glob.glob(f"{fastq_path}/*.fastq*"))
-        return fastq_files[1]
-
-    def get_input_r2(wildcards):
-        fastq_path = config["samples"][wildcards.sample]
-        fastq_files = sorted(glob.glob(f"{fastq_path}/*.fastq*"))
-        return fastq_files[2]
-
-else:
-
-    def get_input_r(wildcards):
-        fastq_path = config["samples"][wildcards.sample]
-        fastq_files = sorted(glob.glob(f"{fastq_path}/*.fastq*"))
-        return fastq_files
-
-# Figure out which samples are each enrichment's input sample
-def get_control_sample(wildcards):
-    control_label = config["controls"][wildcards.treatment]
-    return expand("results/sorted_bam/{control}.bam", control = control_label)
 
 # Check if fastq files are gzipped
 fastq_paths = config["samples"]

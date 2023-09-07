@@ -77,8 +77,8 @@ if config["PE"]:
 
     rule quant:
         input:
-            r1=get_input_r1,
-            r2=get_input_r2,
+            r1=FASTQ_R1,
+            r2=FASTQ_R2,
             index=config["index"]
         output:
             quant="results/quant/{sample}/quant.sf",
@@ -96,7 +96,7 @@ else:
 
     rule quant:
         input:
-            r=get_input_r,
+            r=FASTQ_R1,
             index=config["index"]
         output:
             quant="results/quant/{sample}/quant.sf",

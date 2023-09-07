@@ -89,48 +89,49 @@ then
     print_usage_and_exit
 fi
 
-mkdir -p $outfolder
-cd $outfolder
+## Snakemake will automatically make directory, and changing directory can lead to problems
+#mkdir -p $outfolder
+#cd $outfolder
 
 # extracting all the exonic features to mask
 echo "[1/10] Extracting exonic features from the gtf"
-$awk -v OFS='\t' '{if ($3=="exon") {print $1,$4,$5}}' $gtffile > exons.bed
+$awk -v OFS='\t' '{if ($3=="exon") {print $1,$4,$5}}' $gtffile > ./results/salmon_decoys/exons.bed
 
 # masking the exonic regions from the genome
 echo "[2/10] Masking the genome fasta"
-$bedtools maskfasta -fi $genomefile -bed exons.bed -fo reference.masked.genome.fa
+$bedtools maskfasta -fi $genomefile -bed ./results/salmon_decoys/exons.bed -fo ./results/salmon_decoys/reference.masked.genome.fa
 
 # aligning the transcriptome to the masked genome
 echo "[3/10] Aligning transcriptome to genome"
-$mashmap -r reference.masked.genome.fa -q $txpfile -t $threads --pi 80 -s 500
+$mashmap -r ./results/salmon_decoys/reference.masked.genome.fa -q $txpfile -t $threads --pi 80 -s 500
 
 # extracting the bed files from the reported alignment
 echo "[4/10] Extracting intervals from mashmap alignments"
-$awk -v OFS='\t' '{print $6,$8,$9}' mashmap.out | sort -k1,1 -k2,2n - > genome_found.sorted.bed
+$awk -v OFS='\t' '{print $6,$8,$9}' ./results/salmon_decoys/mashmap.out | sort -k1,1 -k2,2n - > ./results/salmon_decoys/genome_found.sorted.bed
 
 # merging the reported intervals
 echo "[5/10] Merging the intervals"
-$bedtools merge -i genome_found.sorted.bed > genome_found_merged.bed
+$bedtools merge -i ./results/salmon_decoys/genome_found.sorted.bed > ./results/salmon_decoys/genome_found_merged.bed
 
 # extracting relevant sequence from the genome
 echo "[6/10] Extracting sequences from the genome"
-$bedtools getfasta -fi reference.masked.genome.fa -bed genome_found_merged.bed -fo genome_found.fa
+$bedtools getfasta -fi ./results/salmon_decoys/reference.masked.genome.fa -bed ./results/salmon_decoys/genome_found_merged.bed -fo ./results/salmon_decoys/genome_found.fa
 
 # concatenating the sequence at per chromsome level to extract decoy sequences
 echo "[7/10] Concatenating to get decoy sequences"
-$awk '{a=$0; getline;split(a, b, ":");  r[b[1]] = r[b[1]]""$0} END { for (k in r) { print k"\n"r[k] } }' genome_found.fa > decoy.fa
+$awk '{a=$0; getline;split(a, b, ":");  r[b[1]] = r[b[1]]""$0} END { for (k in r) { print k"\n"r[k] } }' ./results/salmon_decoys/genome_found.fa > ./results/salmon_decoys/decoy.fa
 
 # concatenating decoys to transcriptome
 echo "[8/10] Making gentrome"
-cat $txpfile decoy.fa > gentrome.fa
+cat $txpfile ./results/salmon_decoys/decoy.fa > ./results/salmon_decoys/gentrome.fa
 
 # extracting the names of the decoys
 echo "[9/10] Extracting decoy sequence ids"
-grep ">" decoy.fa | $awk '{print substr($1,2); }' > decoys.txt
+grep ">" ./results/salmon_decoys/decoy.fa | $awk '{print substr($1,2); }' > ./results/salmon_decoys/decoys.txt
 
 # removing extra files
 echo "[10/10] Removing temporary files"
-rm exons.bed reference.masked.genome.fa mashmap.out genome_found.sorted.bed genome_found_merged.bed genome_found.fa decoy.fa reference.masked.genome.fa.fai
+rm ./results/salmon_decoys/exons.bed ./results/salmon_decoys/reference.masked.genome.fa ./results/salmon_decoys/mashmap.out ./results/salmon_decoys/genome_found.sorted.bed ./results/salmon_decoys/genome_found_merged.bed ./results/salmon_decoys/genome_found.fa ./results/salmon_decoys/decoy.fa ./results/salmon_decoys/reference.masked.genome.fa.fai
 
 trap : 0
 echo >&2 '

@@ -102,3 +102,18 @@ else:
     if config["strandedness"] == "no"
 
         LIBTYPE = "U"
+
+# Check whether or not decoys will be created
+    # SALMON_DECOYS and SALMON_TRANSCRIPTOME are used as
+    # input for Salmon index. Their values will determine
+    # whether or not generateDecoyTranscriptome.sh will need
+    # to be run.
+if config["make_decoy_aware"]:
+
+    SALMON_DECOYS="results/salmon_decoys/decoys.txt"
+    SALMON_TRANSCRIPTOME="results/salmon_decoys/gentrome.fa"
+
+else:
+
+    SALMON_DECOYS=""
+    SALMON_TRANSCRIPTOME=config["transcriptome"]

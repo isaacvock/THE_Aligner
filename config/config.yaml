@@ -139,8 +139,8 @@ kallisto_quantify_params: ""
 
 ### Salmon parameters
 
-# Path to decoys if wanting to build a decoy-aware index
-decoys: ""
+# If True, creates decoy-aware index
+make_decoy_aware: False
 
 # Optional parameters to set for salmon index
 salmon_index_params: ""

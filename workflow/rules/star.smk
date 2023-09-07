@@ -15,13 +15,18 @@ rule index:
 
 rule align:
     input:
-        fq1 = FASTQ_R1,
-        fq2 = FASTQ_R2,
+        fq1 = get_fastq_r1,
+        fq2 = get_fastq_r2,
         index = config['STAR_index'],
     output:
-        aln="results/bams/{sample}Aligned.out.bam",
-        reads_per_gene="results/bams/{sample}-ReadsPerGene.out.tab",
-        aln_tx="results/bams/{sample}-Aligned.toTranscriptome.out.bam",
+        aln="results/align/{sample}.bam",
+        reads_per_gene=get_reads_per_gene,
+        chim_junc=get_chim_junc,
+        sj="results/align/{sample}-SJ.out.tab",
+        log="results/align/{sample}-Log.out",
+        log_progress="results/align/{sample}-Log.progress.out",
+        log_final="results/align/{sample}-Log.final.out",
+        aln_tx=get_aln_tx
     log:
         "logs/bams/{sample}.log",
     params:

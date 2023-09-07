@@ -21,15 +21,26 @@ else:
 
 
 # Trimmed fastq file paths, used as input for aligners
-if config["PE"]:
 
-    FASTQ_R1 = "results/trimmed/{sample}.1.fastq"
-    FASTQ_R2 = "results/trimmed/{sample}.2.fastq"
+def get_fastq_r1(wildcards):
+    if config["PE"]:
 
-else:
+        return "results/trimmed/{sample}.1.fastq"
+        FASTQ_R2 = "results/trimmed/{sample}.2.fastq"
 
-    FASTQ_R1 = "results/trimmed/{sample}.fastq"
-    FASTQ_R2 = ""
+    else:
+
+        return "results/trimmed/{sample}.fastq"
+        FASTQ_R2 = ""
+
+def get_fastq_r2(wildcards):
+    if config["PE"]:
+
+        return "results/trimmed/{sample}.2.fastq"
+
+    else:
+
+        return ""
 
 
 # Bowtie2 has two different alignment index suffixes, so gotta figure out which will apply
@@ -108,3 +119,43 @@ else:
 
     SALMON_DECOYS=""
     SALMON_TRANSCRIPTOME=config["transcriptome"]
+
+
+
+### STAR EXTRA OUTPUT DECLARATION
+
+# Transcriptome alignment
+def get_aln_tx(wildcards):
+
+    if "TranscriptomeSAM" in config["star_align_params"]:
+
+        return expand("results/align/{SID}-Aligned.toTranscriptome.out.bam", SID = wildcards.sample)
+
+    else:
+
+        return ""
+
+# ReadsPerGene.out.tab
+def get_reads_per_gene(wildcards):
+
+    if "GeneCounts" in config["star_align_params"]:
+
+        return expand("results/align/{SID}-ReadsPerGene.out.tab", SID = wildcards.sample)
+
+    else:
+
+        return ""
+
+
+# Chimeric.out.junction
+def get_chim_junc(wildcards):
+
+    if "--chimOutType Junctions" in config["star_align_params"]:
+
+        return expand("results/align/{SID}-Chimeric.out.junction", SID = wildcards.sample)
+
+    else:
+
+        return ""
+
+

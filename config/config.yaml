@@ -139,8 +139,20 @@ kallisto_quantify_params: ""
 
 ### Salmon parameters
 
-# If True, creates decoy-aware index
-make_decoy_aware: False
+# Determing if and how to make decoy-aware index for salmon
+  # If make_decoy True, then a decoy-aware index will be made
+  # There are two options for how to make this index (see Salmon docs for details: https://salmon.readthedocs.io/en/latest/salmon.html)
+    # If entire_genome is True, then entire genome will be used. This provides a more comprehensive set of decoys at the cost of
+    # requiring more RAM and time to build the index.
+    # 
+    # If entire_genome if False, then "a set of decoy sequences will be identified
+    # by mapping annotated transcripts you wish to index against a hard-masked version
+    # of the organism's genome." (quoted from documentation linked above). This ledas to 
+    # comparable performance as a whole genome decoy but is much less RAM intensive.
+decoy_settings:
+  make_decoy: True
+  entire_genome: False
+
 
 # Optional parameters to set for salmon index
 salmon_index_params: ""

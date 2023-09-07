@@ -1,25 +1,43 @@
-rule get_decoys:
-    input:
-        genome=config["genome"],
-        annotation=config["annotation"],
-        transcriptome=config["transcriptome"],
-    output:
-        gentrome="results/salmon_decoys/gentrome.fa",
-        decoys="results/salmon_decoys/decoys.txt"
-    log:
-        "logs/get_decoys/salmon_decoys.log"
-    threads: 8
-    params:
-        extra=config["salmon_generateDecoy_params"]
-        shellscript=workflow.source_path("../scripts/generateDecoyTranscriptome.sh")
-    conda:
-        "../envs/decoys.yaml"
-    shell:
-        """
-        chmod +x {params.shellscript}
-        {params.shellscript} {params.extra} -a {input.annotation} -o results/salmon_decoys/ \
-        -j {threads} -g {input.genome} -t {input.transcriptome} 2> {log}
-        """
+
+if config["decoy_settings"]["entire_genome"]:
+
+    rule get_decoys:
+        input:
+            genome=config["genome"],
+            transcriptome=config["transcriptome"],
+        output:
+            gentrome="results/salmon_decoys/gentrome.fa",
+            decoys="results/salmon_decoys/decoys.txt"
+        log:
+            "logs/get_decoys/salmon_decoys.log"
+        threads: 2
+        wrapper:
+            "v2.6.0/bio/salmon/decoys 
+
+else:
+
+    rule get_decoys:
+        input:
+            genome=config["genome"],
+            annotation=config["annotation"],
+            transcriptome=config["transcriptome"],
+        output:
+            gentrome="results/salmon_decoys/gentrome.fa",
+            decoys="results/salmon_decoys/decoys.txt"
+        log:
+            "logs/get_decoys/salmon_decoys.log"
+        threads: 8
+        params:
+            extra=config["salmon_generateDecoy_params"]
+            shellscript=workflow.source_path("../scripts/generateDecoyTranscriptome.sh")
+        conda:
+            "../envs/decoys.yaml"
+        shell:
+            """
+            chmod +x {params.shellscript}
+            {params.shellscript} {params.extra} -a {input.annotation} -o results/salmon_decoys/ \
+            -j {threads} -g {input.genome} -t {input.transcriptome} 2> {log}
+            """
     
 
 rule index:

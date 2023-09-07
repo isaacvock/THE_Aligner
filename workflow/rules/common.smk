@@ -108,7 +108,7 @@ else:
     # input for Salmon index. Their values will determine
     # whether or not generateDecoyTranscriptome.sh will need
     # to be run.
-if config["make_decoy_aware"]:
+if config["decoy_settings"]["make_decoy"]:
 
     SALMON_DECOYS="results/salmon_decoys/decoys.txt"
     SALMON_TRANSCRIPTOME="results/salmon_decoys/gentrome.fa"

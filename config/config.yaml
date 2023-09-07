@@ -60,7 +60,7 @@ strandedness: "reverse"
 
 # Directionality
   # Do reads face inwards ("I"), outwards ("O"), or do they match ("M")
-  # Currently only used to determine salmon library type
+  # Currently only used to determine Salmon library type
 directionality: "I"
 
 

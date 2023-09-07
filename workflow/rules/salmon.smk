@@ -1,6 +1,7 @@
 rule index:
     input:
-        sequences=config["transcriptome"]
+        sequences=config["transcriptome"],
+        decoys=config["decoys"]
     output:
         multiext(
             config["index"],

@@ -1,8 +1,8 @@
 ####### GENERAL INFORMATION ABOUT THIS CONFIG #######
 #
 # This config file allows you to specify a number of important pieces of information that
-# the PROseq_etal pipeline will require to run. It also allows you to set optional parameters
-# for all tools that PROseq_etal makes use of.
+# the THE_Aligner pipeline will require to run. It also allows you to set optional parameters
+# for all tools that THE_Aligner makes use of.
 #
 # File paths can either be absolute (e.g., ~/path/to/file/or/directory) or relative
 # to the directory in which you are calling the pipeline from (e.g., data/fastq/WT_1 in the 
@@ -28,7 +28,12 @@ PE: True
 # Path to genome fasta file
 genome: data/genome/genome.fasta
 
+# Path to annotation gtf file
+annotation: data/annotation/genome.gtf
+
+
 # Path to transcriptome fasta file if using pseudoaligner
+  # If not present, will be created automatically with gffread
 transcriptome: data/genome/transcriptome.fasta
 
 # Which aligner to use? 
@@ -44,9 +49,6 @@ aligner: "bwa-mem2"
   # clash with the names of one of the other automatically created
   # directories). 
 indices: bwamem2_index
-
-# Path to annotation gtf file
-annotation: data/annotation/genome.gtf
 
 # Strandedness
   # set to "reverse", "yes", or "no"
@@ -137,11 +139,45 @@ kallisto_quantify_params: ""
 
 ### Salmon parameters
 
+# Path to decoys if wanting to build a decoy-aware index
+decoys: ""
+
 # Optional parameters to set for salmon index
 salmon_index_params: ""
 
 # Optional parameters to set for salmon quant
 salmon_quant_params: ""
+
+
+### gffread parameters (for creating transcriptome.fasta)
+  # See http://ccb.jhu.edu/software/stringtie/gff.shtml#gffread for details
+
+# Path to records to keep
+gffread_ids: ""
+
+# Path to records to drop
+gffread_nids: ""
+
+# Path to sequence information
+gffread_seq_info: ""
+
+# Path to ordered list of reference sequences
+gffread_sort_by: ""
+
+# Annotation attributes to keep
+gffread_attr: ""
+
+# Path to <original_ref_ID> <new_ref_ID>
+gffread_chr_replace: ""
+
+# Path to clustering/merging information 
+  # This is an optional output file
+  # All other gffread parameters above are optional input files
+  # All following gffread parameters below are optional parameters to be passed to `gffread`
+gffread_dupinfo: ""
+
+# Extra parameters for gffread
+gffread_extra: ""
 
 
 ##### LINKS TO SNAKEMAKE WRAPPERS USED #####
@@ -158,3 +194,7 @@ salmon_quant_params: ""
 # fastp wrapper: https://snakemake-wrappers.readthedocs.io/en/stable/wrappers/fastp.html
 
 # fastqc wrapper: https://snakemake-wrappers.readthedocs.io/en/stable/wrappers/fastqc.html
+
+# gffread wrapper: https://snakemake-wrappers.readthedocs.io/en/stable/wrappers/gffread.html
+
+# salmon wrappers: 

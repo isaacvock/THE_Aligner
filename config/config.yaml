@@ -28,6 +28,9 @@ PE: True
 # Path to genome fasta file
 genome: data/genome/genome.fasta
 
+# Path to transcriptome fasta file if using pseudoaligner
+transcriptome: data/genome/transcriptome.fasta
+
 # Which aligner to use? 
   # Options are: "bwa-mem2" or "bowtie2"
 aligner: "bwa-mem2"
@@ -52,6 +55,11 @@ annotation: data/annotation/genome.gtf
   # no means unstranded
   # Used by HTSeq (see https://htseq.readthedocs.io/en/master/htseqcount.html for details)
 strandedness: "reverse"
+
+# Directionality
+  # Do reads face inwards ("I"), outwards ("O"), or do they match ("M")
+  # Currently only used to determine salmon library type
+directionality: "I"
 
 
 ####### OPTIONAL PARAMETERS FOR EACH TOOL USED #######
@@ -118,6 +126,22 @@ bowtie2_build_params: ""
 # Optional parameters to set for bowtie2 align
 bowtie2_align_params: ""
 
+### kallisto parameters
+
+# Optional parameters to set for kallisto index
+kallisto_index_params: ""
+
+# Optional parameters to set for kallisto quant
+kallisto_quantify_params: ""
+
+
+### Salmon parameters
+
+# Optional parameters to set for salmon index
+salmon_index_params: ""
+
+# Optional parameters to set for salmon quant
+salmon_quant_params: ""
 
 
 ##### LINKS TO SNAKEMAKE WRAPPERS USED #####

@@ -60,8 +60,19 @@ if config["aligner"] == "salmon":
 
 ##### Target rule ######
 
-rule all:
-    input:
-        expand("results/fastqc/{SID}_{read}.html", SID = SAMP_NAMES, read = READ_NAMES),
-        expand("results/fastqc/{SID}_{read}_fastqc.zip", SID = SAMP_NAMES, read = READ_NAMES),
-        expand("results/alignment_stats/{SID}.bamstats", SID = SAMP_NAMES)
+if config["aligner"] == "kallisto" or config["aligner"] == "salmon":
+
+    rule all:
+        input:
+            expand("results/fastqc/{SID}_{read}.html", SID = SAMP_NAMES, read = READ_NAMES),
+            expand("results/fastqc/{SID}_{read}_fastqc.zip", SID = SAMP_NAMES, read = READ_NAMES),
+            expand("results/alignment_stats/{SID}.bamstats", SID = SAMP_NAMES)
+
+else:
+
+    rule all:
+        input:
+            expand("results/fastqc/{SID}_{read}.html", SID = SAMP_NAMES, read = READ_NAMES),
+            expand("results/fastqc/{SID}_{read}_fastqc.zip", SID = SAMP_NAMES, read = READ_NAMES),
+            expand("results/alignment_stats/{SID}.bamstats", SID = SAMP_NAMES)
+

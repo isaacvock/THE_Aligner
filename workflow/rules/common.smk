@@ -4,6 +4,9 @@ import glob
 # and to aid in defining wildcards
 SAMP_NAMES = list(config['samples'].keys())
 
+# Directory containing index; used in case of certain aligners
+INDEX_DIR = config["index"]
+
 # Determine how many fastqs to look for
 if config["PE"]:
     READS = [1, 2]
@@ -35,6 +38,26 @@ def get_input_fastqs(wildcards):
     fastq_files = sorted(glob.glob(f"{fastq_path}/*.fastq*"))
     return fastq_files
 
+## Get reads individually
+if config["PE"]:
+
+    def get_input_r1(wildcards):
+        fastq_path = config["samples"][wildcards.sample]
+        fastq_files = sorted(glob.glob(f"{fastq_path}/*.fastq*"))
+        return fastq_files[1]
+
+    def get_input_r2(wildcards):
+        fastq_path = config["samples"][wildcards.sample]
+        fastq_files = sorted(glob.glob(f"{fastq_path}/*.fastq*"))
+        return fastq_files[2]
+
+else:
+
+    def get_input_r(wildcards):
+        fastq_path = config["samples"][wildcards.sample]
+        fastq_files = sorted(glob.glob(f"{fastq_path}/*.fastq*"))
+        return fastq_files
+
 # Figure out which samples are each enrichment's input sample
 def get_control_sample(wildcards):
     control_label = config["controls"][wildcards.treatment]
@@ -51,4 +74,31 @@ for p in fastq_paths.values():
     test_gz = any(path.endswith('.fastq.gz') for path in fastqs)
     is_gz = any([is_gz, test_gz])
 
+# Libtype string if using salmon
+if config["PE"]:
 
+    if config["strandedness"] == "reverse":
+
+        LIBTYPE = config["directionality"] + "SR"
+    
+    if config["strandedness"] == "yes":
+
+        LIBTYPE = config["directionality"] + "SF"
+    
+    if config["strandedness"] == "no"
+
+        LIBTYPE = config["directionality"] + "U"
+
+else:
+
+    if config["strandedness"] == "reverse":
+
+        LIBTYPE = "SR"
+    
+    if config["strandedness"] == "yes":
+
+        LIBTYPE = "SF"
+    
+    if config["strandedness"] == "no"
+
+        LIBTYPE = "U"

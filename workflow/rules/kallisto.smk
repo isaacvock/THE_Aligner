@@ -2,7 +2,7 @@ rule index:
     input:
         fasta=config["transcriptome"],
     output:
-        index=os.path.join(INDEX_DIR, "transcriptome.idx"),
+        index=INDEX_KALLISTO,
     params:
         extra=config["kallisto_index_params"]
     log:

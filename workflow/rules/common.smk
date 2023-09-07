@@ -1,4 +1,5 @@
 import glob
+import os
 
 # Sample names to help expanding lists of all bam files
 # and to aid in defining wildcards
@@ -6,6 +7,9 @@ SAMP_NAMES = list(config['samples'].keys())
 
 # Directory containing index; used in case of certain aligners
 INDEX_DIR = config["index"]
+
+# Path to index for kallisto
+INDEX_KALLISTO = os.path.join(INDEX_DIR, "transcriptome.idx")
 
 # Determine how many fastqs to look for
 if config["PE"]:

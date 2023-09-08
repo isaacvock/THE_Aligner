@@ -138,10 +138,10 @@ rm ./results/salmon_decoys/exons.bed ./results/salmon_decoys/reference.masked.ge
 
 trap : 0
 echo >&2 '
-
 **********************************************
 *** DONE Processing ...
 *** You can use files `$outfolder/gentrome.fa` 
 *** and $outfolder/decoys.txt` with 
 *** `salmon index`
 **********************************************
+'

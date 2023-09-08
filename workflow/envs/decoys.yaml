@@ -1,7 +1,6 @@
 channels:
-  - conda-forge
+  - anaconda
   - bioconda
-  - nodefaults
 dependencies:
   - gawk=4.2.1
   - bedtools=2.28.0

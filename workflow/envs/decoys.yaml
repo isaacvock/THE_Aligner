@@ -4,5 +4,5 @@ channels:
   - anaconda
 dependencies:
   - gawk=4.2.1
-  - bedtools=2.28.0
+  - bedtools>=2.28.0
   - mashmap=2.0

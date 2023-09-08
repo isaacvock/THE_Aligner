@@ -20,13 +20,13 @@ rule align:
         index = config['indices'],
     output:
         aln="results/align/{sample}.bam",
-        reads_per_gene=get_reads_per_gene,
-        chim_junc=get_chim_junc,
+        reads_per_gene=READS_PER_GENE,
+        chim_junc=CHIM_JUNC,
         sj="results/align/{sample}-SJ.out.tab",
         log="results/align/{sample}-Log.out",
         log_progress="results/align/{sample}-Log.progress.out",
         log_final="results/align/{sample}-Log.final.out",
-        aln_tx=get_aln_tx
+        aln_tx=ALN_TX
     log:
         "logs/bams/{sample}.log",
     params:

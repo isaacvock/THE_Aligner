@@ -53,18 +53,16 @@ INDEX_KALLISTO = os.path.join(INDEX_DIR, "transcriptome.idx")
 def get_fastq_r1(wildcards):
     if config["PE"]:
 
-        return "results/trimmed/{sample}.1.fastq"
-        FASTQ_R2 = "results/trimmed/{sample}.2.fastq"
+        return expand("results/trimmed/{SID}.1.fastq", SID = wildcards.sample)
 
     else:
 
-        return "results/trimmed/{sample}.fastq"
-        FASTQ_R2 = ""
+        return expand("results/trimmed/{SID}.fastq", SID = wildcards.sample)
 
 def get_fastq_r2(wildcards):
     if config["PE"]:
 
-        return "results/trimmed/{sample}.2.fastq"
+        return expand("results/trimmed/{SID}.2.fastq", SID = wildcards.sample)
 
     else:
 
@@ -155,37 +153,34 @@ else:
     SJ_DB_GTF = ""
 
 # Transcriptome alignment
-def get_aln_tx(wildcards):
 
-    if "TranscriptomeSAM" in config["star_align_params"]:
+if "TranscriptomeSAM" in config["star_align_params"]:
 
-        return expand("results/align/{SID}-Aligned.toTranscriptome.out.bam", SID = wildcards.sample)
+    ALN_TX = "results/align/{sample}-Aligned.toTranscriptome.out.bam"
 
-    else:
+else:
 
-        return ""
+    ALN_TX = ""
 
 # ReadsPerGene.out.tab
-def get_reads_per_gene(wildcards):
 
-    if "GeneCounts" in config["star_align_params"]:
+if "GeneCounts" in config["star_align_params"]:
 
-        return expand("results/align/{SID}-ReadsPerGene.out.tab", SID = wildcards.sample)
+    READS_PER_GENE = "results/align/{sample}-ReadsPerGene.out.tab"
 
-    else:
+else:
 
-        return ""
+    READS_PER_GENE = ""
 
 
 # Chimeric.out.junction
-def get_chim_junc(wildcards):
 
-    if "--chimOutType Junctions" in config["star_align_params"]:
+if "--chimOutType Junctions" in config["star_align_params"]:
 
-        return expand("results/align/{SID}-Chimeric.out.junction", SID = wildcards.sample)
+    CHIM_JUNC = "results/align/{SID}-Chimeric.out.junction"
 
-    else:
+else:
 
-        return ""
+    CHIM_JUNC =  ""
 
 

@@ -79,7 +79,24 @@ if config["PE"]:
         input:
             r1=get_fastq_r1,
             r2=get_fastq_r2,
-            index=config["indices"]
+            index=multiext(
+                    config["indices"],
+                    "complete_ref_lens.bin",
+                    "ctable.bin",
+                    "ctg_offsets.bin",
+                    "duplicate_clusters.tsv",
+                    "info.json",
+                    "mphf.bin",
+                    "pos.bin",
+                    "pre_indexing.log",
+                    "rank.bin",
+                    "refAccumLengths.bin",
+                    "ref_indexing.log",
+                    "reflengths.bin",
+                    "refseq.bin",
+                    "seq.bin",
+                    "versionInfo.json",
+                ),
         output:
             quant="results/quant/{sample}/quant.sf",
             lib="results/quant/{sample}/lib_format_counts.json"
@@ -97,7 +114,24 @@ else:
     rule quant:
         input:
             r=get_fastq_r1,
-            index=config["indices"]
+            index=multiext(
+                    config["indices"],
+                    "complete_ref_lens.bin",
+                    "ctable.bin",
+                    "ctg_offsets.bin",
+                    "duplicate_clusters.tsv",
+                    "info.json",
+                    "mphf.bin",
+                    "pos.bin",
+                    "pre_indexing.log",
+                    "rank.bin",
+                    "refAccumLengths.bin",
+                    "ref_indexing.log",
+                    "reflengths.bin",
+                    "refseq.bin",
+                    "seq.bin",
+                    "versionInfo.json",
+                ),
         output:
             quant="results/quant/{sample}/quant.sf",
             lib="results/quant/{sample}/lib_format_counts.json"

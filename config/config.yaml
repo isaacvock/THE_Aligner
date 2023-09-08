@@ -181,7 +181,7 @@ kallisto_quantify_params: ""
 ##### SALMON PARAMETERS #####
 
 # Determing if and how to make decoy-aware index for salmon
-  # If make_decoy True, then a decoy-aware index will be made
+  # If make_decoy True, then a decoy-aware index will be made. WARNING: WILL REQUIRE LOTS OF RAM!! >100GB FOR HUMAN GENOME!!
   # There are two options for how to make this index (see Salmon docs for details: https://salmon.readthedocs.io/en/latest/salmon.html)
     # If entire_genome is True, then entire genome will be used. This provides a more comprehensive set of decoys at the cost of
     # requiring more RAM and time to build the index.

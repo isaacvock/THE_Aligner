@@ -16,5 +16,7 @@ rule make_transcriptome_fasta:
         "logs/gffread.log",
     params:
         extra=config["gffread_extra"]
-    wrapper:
-        "v2.6.0/bio/gffread"
+    conda:
+        "../envs/star.yaml"
+    script: 
+        "../scripts/star-align.py"

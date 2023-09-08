@@ -194,6 +194,9 @@ decoy_settings:
   make_decoy: True
   entire_genome: False
 
+# Optional parameters for generateDecoyTranscriptome.sh script
+salmon_generateDecoy_params: ""
+
 
 # Optional parameters to set for salmon index
 salmon_index_params: ""

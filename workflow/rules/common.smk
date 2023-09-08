@@ -156,7 +156,7 @@ else:
 
 if "TranscriptomeSAM" in config["star_align_params"]:
 
-    ALN_TX = "results/align/{sample}-Aligned.toTranscriptome.out.bam"
+    ALN_TX = "results/align/{{sample}}-Aligned.toTranscriptome.out.bam"
 
 else:
 
@@ -166,7 +166,7 @@ else:
 
 if "GeneCounts" in config["star_align_params"]:
 
-    READS_PER_GENE = "results/align/{sample}-ReadsPerGene.out.tab"
+    READS_PER_GENE = "results/align/{{sample}}-ReadsPerGene.out.tab"
 
 else:
 
@@ -177,7 +177,7 @@ else:
 
 if "--chimOutType Junctions" in config["star_align_params"]:
 
-    CHIM_JUNC = "results/align/{sample}-Chimeric.out.junction"
+    CHIM_JUNC = "results/align/{{sample}}-Chimeric.out.junction"
 
 else:
 

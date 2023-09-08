@@ -73,7 +73,7 @@ if config["aligner"] == "salmon":
 
 elif config["aligner"] == "kallisto":
 
-        rule all:
+    rule all:
         input:
             expand("results/fastqc/{SID}_{read}.html", SID = SAMP_NAMES, read = READ_NAMES),
             expand("results/fastqc/{SID}_{read}_fastqc.zip", SID = SAMP_NAMES, read = READ_NAMES),

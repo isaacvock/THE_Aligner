@@ -13,10 +13,10 @@ rule make_transcriptome_fasta:
         #dupinfo=config["gffread_dupinfo"]
     threads: 1
     log:
-        "logs/gffread.log",
+        "logs/make_transcriptome_fasta/gffread.log",
     params:
         extra=config["gffread_extra"]
     conda:
-        "../envs/star.yaml"
+        "../envs/gffread.yaml"
     script: 
-        "../scripts/star-align.py"
+        "../scripts/gffread.py"

@@ -177,7 +177,7 @@ else:
 
 if "--chimOutType Junctions" in config["star_align_params"]:
 
-    CHIM_JUNC = "results/align/{SID}-Chimeric.out.junction"
+    CHIM_JUNC = "results/align/{sample}-Chimeric.out.junction"
 
 else:
 

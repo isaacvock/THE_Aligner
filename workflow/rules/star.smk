@@ -25,7 +25,7 @@ rule align:
         log_progress="results/align/{sample}-Log.progress.out",
         log_final="results/align/{sample}-Log.final.out",
     log:
-        "logs/bams/{sample}.log",
+        "logs/align/{sample}.log",
     params:
         aln_tx=lambda wc: "TranscriptomeSAM" in config["star_align_params"],
         reads_per_gene=lambda wc: "GeneCounts" in config["star_align_params"],

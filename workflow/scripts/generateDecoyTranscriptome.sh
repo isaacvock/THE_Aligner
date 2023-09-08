@@ -105,6 +105,9 @@ $bedtools maskfasta -fi $genomefile -bed ./results/salmon_decoys/exons.bed -fo .
 echo "[3/10] Aligning transcriptome to genome"
 $mashmap -r ./results/salmon_decoys/reference.masked.genome.fa -q $txpfile -t $threads --pi 80 -s 500
 
+# Move mashmap output into derired output directory
+mv mashmap.out ./results/salmon_decoys/mashmap.out
+
 # extracting the bed files from the reported alignment
 echo "[4/10] Extracting intervals from mashmap alignments"
 $awk -v OFS='\t' '{print $6,$8,$9}' ./results/salmon_decoys/mashmap.out | sort -k1,1 -k2,2n - > ./results/salmon_decoys/genome_found.sorted.bed

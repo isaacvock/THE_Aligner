@@ -12,7 +12,7 @@ if config["decoy_settings"]["entire_genome"]:
             "logs/get_decoys/salmon_decoys.log"
         threads: 2
         wrapper:
-            "v2.6.0/bio/salmon/decoys 
+            "v2.6.0/bio/salmon/decoys"
 
 else:
 
@@ -28,7 +28,7 @@ else:
             "logs/get_decoys/salmon_decoys.log"
         threads: 8
         params:
-            extra=config["salmon_generateDecoy_params"]
+            extra=config["salmon_generateDecoy_params"],
             shellscript=workflow.source_path("../scripts/generateDecoyTranscriptome.sh")
         conda:
             "../envs/decoys.yaml"
@@ -86,7 +86,7 @@ if config["PE"]:
         log:
             "logs/quant/{sample}.log"
         params:
-            libtype=LIBTYPE
+            libtype=LIBTYPE,
             extra=config["salmon_quant_params"]
         threads: 12 # See https://salmon.readthedocs.io/en/latest/salmon.html Note for motivation
         wrapper:
@@ -104,7 +104,7 @@ else:
         log:
             "logs/quant/{sample}.log"
         params:
-            libtype=LIBTYPE
+            libtype=LIBTYPE,
             extra=config["salmon_quant_params"]
         threads: 12
         wrapper:

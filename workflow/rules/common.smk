@@ -9,7 +9,7 @@ import os
 SAMP_NAMES = list(config['samples'].keys())
 
 # Directory containing index; used in case of certain aligners
-INDEX_DIR = config["index"]
+INDEX_DIR = config["indices"]
 
 # Determine how many fastqs to look for
 if config["PE"]:

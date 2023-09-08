@@ -3,7 +3,7 @@ rule index:
         fasta=config["genome"],
         gtf=config["annotation"],
     output:
-        directory(config['index']),
+        directory(config['indices']),
     threads: 12
     params:
         extra=config["star_index_params"],
@@ -17,7 +17,7 @@ rule align:
     input:
         fq1 = get_fastq_r1,
         fq2 = get_fastq_r2,
-        index = config['STAR_index'],
+        index = config['indices'],
     output:
         aln="results/align/{sample}.bam",
         reads_per_gene=get_reads_per_gene,

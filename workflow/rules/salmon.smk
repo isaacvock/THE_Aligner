@@ -46,7 +46,7 @@ rule index:
         decoys=SALMON_DECOYS
     output:
         multiext(
-            config["index"],
+            config["indices"],
             "complete_ref_lens.bin",
             "ctable.bin",
             "ctg_offsets.bin",
@@ -79,7 +79,7 @@ if config["PE"]:
         input:
             r1=get_fastq_r1,
             r2=get_fastq_r2,
-            index=config["index"]
+            index=config["indices"]
         output:
             quant="results/quant/{sample}/quant.sf",
             lib="results/quant/{sample}/lib_format_counts.json"
@@ -97,7 +97,7 @@ else:
     rule quant:
         input:
             r=get_fastq_r1,
-            index=config["index"]
+            index=config["indices"]
         output:
             quant="results/quant/{sample}/quant.sf",
             lib="results/quant/{sample}/lib_format_counts.json"

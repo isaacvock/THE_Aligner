@@ -108,7 +108,7 @@ if config["PE"]:
 
         LIBTYPE = config["directionality"] + "SF"
     
-    if config["strandedness"] == "no"
+    if config["strandedness"] == "no":
 
         LIBTYPE = config["directionality"] + "U"
 
@@ -122,7 +122,7 @@ else:
 
         LIBTYPE = "SF"
     
-    if config["strandedness"] == "no"
+    if config["strandedness"] == "no":
 
         LIBTYPE = "U"
 

@@ -20,16 +20,19 @@ rule align:
         index = config['indices'],
     output:
         aln="results/align/{sample}.bam",
-        reads_per_gene=READS_PER_GENE,
-        chim_junc=CHIM_JUNC,
+        reads_per_gene="results/align/{sample}-ReadsPerGene.out.tab",
+        chim_junc="results/align/{sample}-Chimeric.out.junction",
         sj="results/align/{sample}-SJ.out.tab",
         log="results/align/{sample}-Log.out",
         log_progress="results/align/{sample}-Log.progress.out",
         log_final="results/align/{sample}-Log.final.out",
-        aln_tx=ALN_TX
+        aln_tx="results/align/{sample}-Aligned.toTranscriptome.out.bam"
     log:
         "logs/bams/{sample}.log",
     params:
+        aln_tx=lambda wc: "TranscriptomeSAM" in config["star_align_params"],
+        reads_per_gene=lambda wc: "GeneCounts" in config["star_align_params"],
+        chim_junc=lambda wc: "--chimOutType Junctions" in config["star_align_params"],
         idx=lambda wc, input: input.index,
         extra="{} {}".format(
             SJ_DB_GTF, config["star_align_params"]

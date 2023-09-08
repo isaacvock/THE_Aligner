@@ -71,9 +71,9 @@ with tempfile.TemporaryDirectory() as tmpdir:
         " {log}"
     )
 
-    if snakemake.output.get("reads_per_gene"):
+    if snakemake.params.get("reads_per_gene"):
         shell("cat {tmpdir}/ReadsPerGene.out.tab > {snakemake.output.reads_per_gene:q}")
-    if snakemake.output.get("chim_junc"):
+    if snakemake.params.get("chim_junc"):
         shell("cat {tmpdir}/Chimeric.out.junction > {snakemake.output.chim_junc:q}")
     if snakemake.output.get("sj"):
         shell("cat {tmpdir}/SJ.out.tab > {snakemake.output.sj:q}")
@@ -83,5 +83,5 @@ with tempfile.TemporaryDirectory() as tmpdir:
         shell("cat {tmpdir}/Log.progress.out > {snakemake.output.log_progress:q}")
     if snakemake.output.get("log_final"):
         shell("cat {tmpdir}/Log.final.out > {snakemake.output.log_final:q}")
-    if snakemake.output.get("aln_tx"):
+    if snakemake.params.get("aln_tx"):
         shell("cat {tmpdir}/Aligned.toTranscriptome.out.bam > {snakemake.output.aln_tx:q}")

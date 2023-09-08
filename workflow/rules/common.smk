@@ -152,35 +152,4 @@ else:
 
     SJ_DB_GTF = ""
 
-# Transcriptome alignment
-
-if "TranscriptomeSAM" in config["star_align_params"]:
-
-    ALN_TX = "results/align/{{sample}}-Aligned.toTranscriptome.out.bam"
-
-else:
-
-    ALN_TX = ""
-
-# ReadsPerGene.out.tab
-
-if "GeneCounts" in config["star_align_params"]:
-
-    READS_PER_GENE = "results/align/{{sample}}-ReadsPerGene.out.tab"
-
-else:
-
-    READS_PER_GENE = ""
-
-
-# Chimeric.out.junction
-
-if "--chimOutType Junctions" in config["star_align_params"]:
-
-    CHIM_JUNC = "results/align/{{sample}}-Chimeric.out.junction"
-
-else:
-
-    CHIM_JUNC =  ""
-
 

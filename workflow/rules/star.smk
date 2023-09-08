@@ -20,13 +20,10 @@ rule align:
         index = config['indices'],
     output:
         aln="results/align/{sample}.bam",
-        reads_per_gene="results/align/{sample}-ReadsPerGene.out.tab",
-        chim_junc="results/align/{sample}-Chimeric.out.junction",
         sj="results/align/{sample}-SJ.out.tab",
         log="results/align/{sample}-Log.out",
         log_progress="results/align/{sample}-Log.progress.out",
         log_final="results/align/{sample}-Log.final.out",
-        aln_tx="results/align/{sample}-Aligned.toTranscriptome.out.bam"
     log:
         "logs/bams/{sample}.log",
     params:
@@ -37,6 +34,9 @@ rule align:
         extra="{} {}".format(
             SJ_DB_GTF, config["star_align_params"]
         ),
+        out_reads_per_gene="results/align/{sample}-ReadsPerGene.out.tab",
+        out_chim_junc="results/align/{sample}-Chimeric.out.junction",
+        out_aln_tx="results/align/{sample}-Aligned.toTranscriptome.out.bam"
     conda:
         "../envs/star.yaml"
     threads: 24

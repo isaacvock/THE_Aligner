@@ -16,7 +16,7 @@ rule quant:
         fastq=expand("results/trimmed/{{sample}}.{read}.fastq", read = READS),
         index=INDEX_KALLISTO
     output:
-        dir=directory("results/kallisto_quant/{sample}")
+        dir=directory("results/kallisto_quant/{sample}"),
         run_info="results/kallisto_quant/{sample}/run_info.json"
     params:
         extra=config["kallisto_quant_params"],

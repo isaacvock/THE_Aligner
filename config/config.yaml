@@ -42,7 +42,10 @@ transcriptome: data/genome/transcriptome.fasta
 
 
 # Which aligner to use? 
-  # Options are: "bwa-mem2" or "bowtie2"
+  # Options are:
+    # 1) Strictly splicing unaware aligners: "bwa-mem2", "bowtie2"
+    # 2) Splice aware (or optionally unaware) aligners: "star", "hisat2"
+    # 3) Pseudoaligners: "kallisto", "salmon"
 aligner: "bwa-mem2"
 
 

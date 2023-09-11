@@ -11,7 +11,7 @@ if config["annotation"]:
             "../envs/hisat2.yaml"
         threads: 1
         shell:
-            "hisat2_extract_exons.py {input.annotation} 2> {log}"
+            "hisat2_extract_exons.py {input.annotation} 1> {output} 2> {log}"
 
     rule get_ss:
         input:
@@ -24,7 +24,7 @@ if config["annotation"]:
             "../envs/hisat2.yaml"
         threads: 1
         shell:
-            "hisat2_extract_splice_sites.py {input.annotation} 2> {log}"
+            "hisat2_extract_splice_sites.py {input.annotation} 1> {output} 2> {log}"
 
     rule index:
         input:

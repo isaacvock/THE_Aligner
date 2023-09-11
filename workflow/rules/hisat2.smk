@@ -31,7 +31,7 @@ if config["annotation"]:
             fasta=config["genome"],
             annotation=config["annotation"],
             ss="results/get_ss/splice_sites.ss",
-            exons="results/get_exon/exons.exon",
+            exons="results/get_exons/exons.exon",
         output:
             directory(config["indices"]),
         params:

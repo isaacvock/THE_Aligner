@@ -75,7 +75,8 @@ rule align:
     log:
         "logs/align/{sample}.log",
     params:
-        extra=config["hisat2_align_params"],
+        extra="{} {}".format(HISAT2_STRANDEDNESS,
+                            config["hisat2_align_params"]),
     threads: 20
     wrapper:
         "v2.6.0/bio/hisat2/align"

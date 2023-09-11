@@ -167,6 +167,8 @@ star_align_params: "--outSAMtype BAM SortedByCoordinate --outSAMattributes NH HI
 hisat2_index_params: ""
 
 # Optional parmaeters to set for hisat2 alignment
+  # NOTE: --rna-strandedness is automatically set based on required strandedness parameter
+    # DON'T REDUNDANTLY SPECIFY --rna-strandedness HERE!!
 hisat2_align_params: ""
 
 

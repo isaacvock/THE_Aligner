@@ -153,3 +153,34 @@ else:
     SJ_DB_GTF = ""
 
 
+
+### HISAT2 HELPERS
+
+# Figure out what to pass to --rna-strandedness
+if config["strandedness"] == "no":
+
+    HISAT2_STRANDEDNESS = ""
+
+elif config["strandedness"] == "reverse":
+
+    if config["PE"]:
+
+        HISAT2_STRANDEDNESS = "--rna-strandedness RF"
+
+    else:
+
+        HISAT2_STRANDEDNESS = "--rna-strandedness R"
+
+
+
+else:
+
+    if config["PE"]:
+
+        HISAT2_STRANDEDNESS = "--rna-strandedness FR"
+
+    else:
+
+        HISAT2_STRANDEDNESS = "--rna-strandedness F"
+
+

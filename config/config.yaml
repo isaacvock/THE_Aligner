@@ -174,7 +174,7 @@ hisat2_align_params: ""
 kallisto_index_params: ""
 
 # Optional parameters to set for kallisto quant
-kallisto_quantify_params: ""
+kallisto_quant_params: ""
 
 
 

@@ -184,3 +184,13 @@ else:
         HISAT2_STRANDEDNESS = "--rna-strandedness F"
 
 
+# Index base name
+if config["hisat2_index_base"]:
+
+    HISAT2_BASE = "{}/{}".format(INDEX_PATH, config["hisat2_index_base"])
+
+else:
+
+    HISAT2_BASE = "{}/{}".format(INDEX_PATH, "hisat2_index")
+
+

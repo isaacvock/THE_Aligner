@@ -35,7 +35,7 @@ if config["annotation"]:
         output:
             directory(config["indices"]),
         params:
-            prefix = "hisat2_index",
+            prefix = HISAT2_BASE,
             extra= "{} {}".format("--ss results/get_ss/splice_sites.ss --exon results/get_exons/exons.exon",
                                 config["hisat2_index_params"])
         log:
@@ -57,7 +57,7 @@ else:
         output:
             directory(config["indices"]),
         params:
-            prefix = "hisat2_index",
+            prefix = HISAT2_BASE,
             extra=config["hisat2_index_params"],
         log:
             "logs/index/hisat2_index.log"

@@ -171,6 +171,9 @@ hisat2_index_params: ""
     # DON'T REDUNDANTLY SPECIFY --rna-strandedness HERE!!
 hisat2_align_params: ""
 
+# Index base name. If not specified, defaults to "hisat2_index"
+hisat2_index_base: ""
+
 
 
 ##### KALLISTO PARAMETERS #####

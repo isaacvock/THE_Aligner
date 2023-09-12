@@ -165,11 +165,11 @@ elif config["strandedness"] == "reverse":
 
     if config["PE"]:
 
-        HISAT2_STRANDEDNESS = "--rna-strandedness RF"
+        HISAT2_STRANDEDNESS = "--rna-strandness RF"
 
     else:
 
-        HISAT2_STRANDEDNESS = "--rna-strandedness R"
+        HISAT2_STRANDEDNESS = "--rna-strandness R"
 
 
 
@@ -177,11 +177,11 @@ else:
 
     if config["PE"]:
 
-        HISAT2_STRANDEDNESS = "--rna-strandedness FR"
+        HISAT2_STRANDEDNESS = "--rna-strandness FR"
 
     else:
 
-        HISAT2_STRANDEDNESS = "--rna-strandedness F"
+        HISAT2_STRANDEDNESS = "--rna-strandness F"
 
 
 # Index base name

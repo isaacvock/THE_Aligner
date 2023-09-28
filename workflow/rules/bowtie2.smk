@@ -13,7 +13,7 @@ rule index:
             expand(".rev.1.bt{suffix}", suffix = INDEX_SUFFIX),
         ),
     log:
-        "logs/index/index.log",
+        "logs/index/bowtie2_index.log",
     params:
         extra=config["bowtie2_build_params"],  # optional parameters
     threads: 10
@@ -37,7 +37,7 @@ rule align:
     output:
         "results/align/{sample}.bam",
     log:
-        "logs/align/{sample}.log",
+        "logs/align/{sample}_bowtie2.log",
     params:
         extra=config["bowtie2_align_params"],
     threads: 20

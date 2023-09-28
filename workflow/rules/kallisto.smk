@@ -6,7 +6,7 @@ rule index:
     params:
         extra=config["kallisto_index_params"]
     log:
-        "logs/kallisto_index/kallisto_index.log"
+        "logs/index/kallisto_index.log"
     threads: 8
     wrapper:
         "v2.6.0/bio/kallisto/index"
@@ -21,7 +21,7 @@ rule quant:
     params:
         extra=config["kallisto_quant_params"],
     log:
-        "logs/kallisto_quant/{sample}.log"
+        "logs/quant/{sample}_kallisto.log"
     conda:
         "../envs/kallisto.yaml"
     threads: 12

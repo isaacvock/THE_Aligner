@@ -101,7 +101,7 @@ if config["PE"]:
             quant="results/quant/{sample}/quant.sf",
             lib="results/quant/{sample}/lib_format_counts.json"
         log:
-            "logs/quant/{sample}.log"
+            "logs/quant/{sample}_salmon.log"
         params:
             libtype=LIBTYPE,
             extra=config["salmon_quant_params"]
@@ -136,7 +136,7 @@ else:
             quant="results/quant/{sample}/quant.sf",
             lib="results/quant/{sample}/lib_format_counts.json"
         log:
-            "logs/quant/{sample}.log"
+            "logs/quant/{sample}_salmon.log"
         params:
             libtype=LIBTYPE,
             extra=config["salmon_quant_params"]

@@ -73,7 +73,7 @@ rule align:
     output:
         "results/align/{sample}.bam",
     log:
-        "logs/align/{sample}.log",
+        "logs/align/{sample}_hisat2.log",
     params:
         extra="{} {}".format(HISAT2_STRANDEDNESS,
                             config["hisat2_align_params"]),

@@ -10,7 +10,7 @@ rule index:
             ".bwt.2bit.64", 
             ".pac"),
     log:
-        "logs/index/index.log",
+        "logs/index/bwamem2_index.log",
     wrapper:
         "v2.2.1/bio/bwa-mem2/index"
 
@@ -28,7 +28,7 @@ rule align:
     output:
         "results/align/{sample}.bam",
     log:
-        "logs/align/{sample}.log",
+        "logs/align/{sample}_bwamem2.log",
     params:
         extra=config["bwamem2_align_params"],
         sort=config["bwamem2_sort"],  # Can be 'none', 'samtools' or 'picard'.

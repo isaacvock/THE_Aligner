@@ -8,7 +8,7 @@ rule index:
     params:
         extra=config["star_index_params"],
     log:
-        "logs/star_index_genome.log",
+        "logs/index/star_index_genome.log",
     wrapper:
         "v2.6.0/bio/star/index"
 
@@ -25,7 +25,7 @@ rule align:
         log_progress="results/align/{sample}-Log.progress.out",
         log_final="results/align/{sample}-Log.final.out",
     log:
-        "logs/align/{sample}.log",
+        "logs/align/{sample}_star.log",
     params:
         aln_tx=lambda wc: "TranscriptomeSAM" in config["star_align_params"],
         reads_per_gene=lambda wc: "GeneCounts" in config["star_align_params"],

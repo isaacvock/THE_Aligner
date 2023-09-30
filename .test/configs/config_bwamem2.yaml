@@ -43,7 +43,7 @@ transcriptome: data/genome/transcriptome.fasta
     # 1) Strictly splicing unaware aligners: "bwa-mem2", "bowtie2"
     # 2) Splice aware (or optionally unaware) aligners: "star", "hisat2"
     # 3) Pseudoaligners: "kallisto", "salmon"
-aligner: "bwamem2"
+aligner: "bwa-mem2"
 
 
 # Path to directory containing indices

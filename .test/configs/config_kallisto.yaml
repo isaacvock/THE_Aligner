@@ -17,7 +17,7 @@
 samples:
   WT_1: data/WT1
   WT_2: data/WT2
-  WT_ctl: data/fastq/WTctl
+  WT_ctl: data/WTctl
 
 
 # Paired end? 

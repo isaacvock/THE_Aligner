@@ -38,38 +38,72 @@ else:
             {params.shellscript} {params.extra} -a {input.annotation} -o results/salmon_decoys/ \
             -j {threads} -g {input.genome} -t {input.transcriptome} 2> {log}
             """
-    
+   decoy_settings:
+  make_decoy: True 
+if config['decoy_settings']['make_decoy']:
 
-rule index:
-    input:
-        sequences=SALMON_TRANSCRIPTOME,
-        decoys=SALMON_DECOYS
-    output:
-        multiext(
-            config["indices"],
-            "complete_ref_lens.bin",
-            "ctable.bin",
-            "ctg_offsets.bin",
-            "duplicate_clusters.tsv",
-            "info.json",
-            "mphf.bin",
-            "pos.bin",
-            "pre_indexing.log",
-            "rank.bin",
-            "refAccumLengths.bin",
-            "ref_indexing.log",
-            "reflengths.bin",
-            "refseq.bin",
-            "seq.bin",
-            "versionInfo.json",
-        ),
-    log:
-        "logs/index/salmon_index.log"
-    threads: 16 # Borrowed from vignette here: https://combine-lab.github.io/alevin-fry-tutorials/2021/improving-txome-specificity/
-    params:
-        extra=config["salmon_index_params"]
-    wrapper:
-        "v2.6.0/bio/salmon/index"
+    rule index:
+        input:
+            sequences=SALMON_TRANSCRIPTOME,
+            decoys=SALMON_DECOYS
+        output:
+            multiext(
+                config["indices"],
+                "complete_ref_lens.bin",
+                "ctable.bin",
+                "ctg_offsets.bin",
+                "duplicate_clusters.tsv",
+                "info.json",
+                "mphf.bin",
+                "pos.bin",
+                "pre_indexing.log",
+                "rank.bin",
+                "refAccumLengths.bin",
+                "ref_indexing.log",
+                "reflengths.bin",
+                "refseq.bin",
+                "seq.bin",
+                "versionInfo.json",
+            ),
+        log:
+            "logs/index/salmon_index.log"
+        threads: 16 # Borrowed from vignette here: https://combine-lab.github.io/alevin-fry-tutorials/2021/improving-txome-specificity/
+        params:
+            extra=config["salmon_index_params"]
+        wrapper:
+            "v2.6.0/bio/salmon/index"
+
+else:
+
+    rule index:
+        input:
+            sequences=SALMON_TRANSCRIPTOME,
+        output:
+            multiext(
+                config["indices"],
+                "complete_ref_lens.bin",
+                "ctable.bin",
+                "ctg_offsets.bin",
+                "duplicate_clusters.tsv",
+                "info.json",
+                "mphf.bin",
+                "pos.bin",
+                "pre_indexing.log",
+                "rank.bin",
+                "refAccumLengths.bin",
+                "ref_indexing.log",
+                "reflengths.bin",
+                "refseq.bin",
+                "seq.bin",
+                "versionInfo.json",
+            ),
+        log:
+            "logs/index/salmon_index.log"
+        threads: 16 # Borrowed from vignette here: https://combine-lab.github.io/alevin-fry-tutorials/2021/improving-txome-specificity/
+        params:
+            extra=config["salmon_index_params"]
+        wrapper:
+            "v2.6.0/bio/salmon/index"
 
 
 

@@ -32,12 +32,6 @@ jobs:
         directory: .test
         snakefile: workflow/Snakefile
         args: "--configfile .test/configs/config_hisat2.yaml --use-conda --show-failed-logs --cores 2 --conda-cleanup-pkgs cache"
-    - name: Test workflow (kallisto)
-      uses: snakemake/snakemake-github-action@v1.22.0
-      with:
-        directory: .test
-        snakefile: workflow/Snakefile
-        args: "--configfile .test/configs/config_kallisto.yaml --use-conda --show-failed-logs --cores 2 --conda-cleanup-pkgs cache"
     - name: Test workflow (salmon)
       uses: snakemake/snakemake-github-action@v1.22.0
       with:

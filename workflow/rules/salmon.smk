@@ -38,8 +38,7 @@ else:
             {params.shellscript} {params.extra} -a {input.annotation} -o results/salmon_decoys/ \
             -j {threads} -g {input.genome} -t {input.transcriptome} 2> {log}
             """
-   decoy_settings:
-  make_decoy: True 
+
 if config['decoy_settings']['make_decoy']:
 
     rule index:

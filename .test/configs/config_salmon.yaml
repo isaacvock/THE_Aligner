@@ -1,0 +1,263 @@
+####### GENERAL INFORMATION ABOUT THIS CONFIG #######
+#
+# This config file allows you to specify a number of important pieces of information that
+# the THE_Aligner pipeline will require to run. It also allows you to set optional parameters
+# for all tools that THE_Aligner makes use of.
+#
+# File paths can either be absolute (e.g., ~/path/to/file/or/directory) or relative
+# to the directory in which you are calling the pipeline from (e.g., data/fastq/WT_1 in the 
+# example samples entry means to look in the data directory present in the directory
+# where you called `snakemake` to run the pipeline).
+#
+####### PARAMETERS YOU NEED TO SET #######
+
+
+## Paths to fastq containing directories.
+  # Fastqs may be either unzipped or gzipped
+samples:
+  WT_1: data/WT1
+  WT_2: data/WT2
+  WT_ctl: data/fastq/WTctl
+
+
+# Paired end? 
+  # Set to True or False, no double quotes
+PE: True
+
+
+# Path to genome fasta file
+genome: data/genome/genome.fasta
+
+
+# Path to annotation gtf file
+annotation: data/annotation/genome.gtf
+
+
+# Path to transcriptome fasta file if using pseudoaligner
+  # If not present, will be created automatically with gffread
+transcriptome: data/genome/transcriptome.fasta
+
+
+# Which aligner to use? 
+  # Options are:
+    # 1) Strictly splicing unaware aligners: "bwa-mem2", "bowtie2"
+    # 2) Splice aware (or optionally unaware) aligners: "star", "hisat2"
+    # 3) Pseudoaligners: "kallisto", "salmon"
+aligner: "salmon"
+
+
+# Path to directory containing indices
+  # Indices will be built automatically if not present
+  # I would suggest naming this "aligner"_index, though any
+  # directory path name will do (avoid results/...; the 
+  # results/ directory is where the pipeline output will be created,
+  # so probably better to avoid specifying a path there that might
+  # clash with the names of one of the other automatically created
+  # directories). 
+indices: hisat2_index
+
+
+# Strandedness
+  # set to "reverse", "yes", or "no"
+  # reverse means that read 2 represents 5' to 3' sequence of original RNA (read 1 thus represents its reverse complement)
+  # yes means that read 1 represents 5' to 3' sequence of original RNA
+  # no means unstranded
+  # Used by HTSeq (see https://htseq.readthedocs.io/en/master/htseqcount.html for details)
+strandedness: "reverse"
+
+
+# Directionality
+  # Do reads face inwards ("I"), outwards ("O"), or do they match ("M")
+  # Currently only used to determine Salmon library type
+directionality: "I"
+
+
+####### OPTIONAL PARAMETERS FOR EACH TOOL USED #######
+
+
+##### PARAMETERS MOST WORTH DOUBLE CHECKING #####
+
+# Adapters to pass to fastp 
+  # Not strictly necessary as fastp can autodetect. Autodetection is more accurate for paired-end data
+  # For paired-end data with widely used Illumina TruSeq adapters, this could be: 
+  # "--adapter_sequence AGATCGGAAGAGCACACGTCTGAACTCCAGTCA --adapter_sequence_r2 AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT"
+fastp_adapters: "--adapter_sequence AGATCGGAAGAGCACACGTCTGAACTCCAGTCA --adapter_sequence_r2 AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT"
+
+
+
+##### OTHER FASTP PARAMETERS #####
+  # See https://github.com/OpenGene/fastp for details
+
+# Optional parameters to set for fastp
+fastp_parameters: "" 
+
+
+
+##### FASTQC PARAMETERS #####
+  # See https://www.bioinformatics.babraham.ac.uk/projects/fastqc/ for details
+
+# Optional parameters to set for fastqc
+fastqc_params: "--quiet"
+
+
+
+##### BWA-MEM2 PARAMETERS #####
+  # See https://github.com/bwa-mem2/bwa-mem2 for details
+
+# Optional parameters to set for bwa-mem2 mem (its alignment function)
+bwamem2_align_params: ""
+
+# Do you want to automatically sort bam files produced by bwa-mem2?
+  # Shouldn't be necessary as sorting is performed by pipeline automatically
+bwamem2_sort: "none" # Can be 'none', 'samtools', or 'picard'
+
+# If sorting bwa-mem2 output, how would you like to sort it?
+bwamem2_sort_order: "coordinate" # Can be 'coordinate' (default) or 'queryname'.'
+
+# Optional parameters to set for tool used for optional sorting of bwa-mem2 output
+bwamem2_sort_extra: "" # Extra args for samtools/picard, relevant only if bwamem2_sort is not 'none'.
+
+
+
+##### SAMTOOLS PARAMETERS #####
+  # See http://www.htslib.org/doc/samtools-sort.html for details
+
+# Optional parameters to set for samtools sort
+samtools_params: ""
+
+
+
+##### BAMTOOLS PARAMETERS #####
+  # See https://stab.st-andrews.ac.uk/wiki/index.php/Bamtools for details
+  
+# Optional parameters to set for bamtools stat
+bamtools_params: ""
+
+
+
+###### BOWTIE2 PARAMETERS #####
+  # See https://github.com/BenLangmead/bowtie2 for details
+
+# Optional parameters to set for bowtie2 build (its index building function)
+bowtie2_build_params: ""
+
+# Optional parameters to set for bowtie2 align
+bowtie2_align_params: ""
+
+
+
+##### STAR PARAMETERS #####
+
+# Optional parameters to set for star index
+  # --sjdbGTFfile is automatically set to be the provided annotation file
+star_index_params: "--sjdbOverhang 100"
+
+# Optional parameters to set for star align
+  # --sjdbGTFfile is automatically set to be the provided annotation file
+star_align_params: "--outSAMtype BAM SortedByCoordinate --outSAMattributes NH HI AS NM MD --quantMode TranscriptomeSAM GeneCounts"
+
+
+
+##### HISAT2 PARAMETERS #####
+
+# Optional parameters to set for hisat2 indexing
+hisat2_index_params: ""
+
+# Optional parmaeters to set for hisat2 alignment
+  # NOTE: --rna-strandedness is automatically set based on required strandedness parameter
+    # DON'T REDUNDANTLY SPECIFY --rna-strandedness HERE!!
+hisat2_align_params: ""
+
+# Index base name. If not specified, defaults to "hisat2_index"
+hisat2_index_base: ""
+
+
+
+##### KALLISTO PARAMETERS #####
+
+# Optional parameters to set for kallisto index
+kallisto_index_params: ""
+
+# Optional parameters to set for kallisto quant
+kallisto_quant_params: ""
+
+
+
+##### SALMON PARAMETERS #####
+
+# Determing if and how to make decoy-aware index for salmon
+  # If make_decoy True, then a decoy-aware index will be made. WARNING: WILL REQUIRE LOTS OF RAM!! >100GB FOR HUMAN GENOME!!
+  # There are two options for how to make this index (see Salmon docs for details: https://salmon.readthedocs.io/en/latest/salmon.html)
+    # If entire_genome is True, then entire genome will be used. This provides a more comprehensive set of decoys at the cost of
+    # requiring more RAM and time to build the index.
+    # 
+    # If entire_genome if False, then "a set of decoy sequences will be identified
+    # by mapping annotated transcripts you wish to index against a hard-masked version
+    # of the organism's genome." (quoted from documentation linked above). This leads to 
+    # comparable performance as a whole genome decoy but is much less RAM intensive.
+decoy_settings:
+  make_decoy: False
+  entire_genome: False
+
+# Optional parameters for generateDecoyTranscriptome.sh script
+salmon_generateDecoy_params: ""
+
+
+# Optional parameters to set for salmon index
+salmon_index_params: ""
+
+# Optional parameters to set for salmon quant
+salmon_quant_params: ""
+
+
+
+##### GFFREAD PARAMETERS (for creating transcriptome.fasta) #####
+  # See http://ccb.jhu.edu/software/stringtie/gff.shtml#gffread for details
+
+# Path to records to keep
+gffread_ids: ""
+
+# Path to records to drop
+gffread_nids: ""
+
+# Path to sequence information
+gffread_seq_info: ""
+
+# Path to ordered list of reference sequences
+gffread_sort_by: ""
+
+# Annotation attributes to keep
+gffread_attr: ""
+
+# Path to <original_ref_ID> <new_ref_ID>
+gffread_chr_replace: ""
+
+# Path to clustering/merging information 
+  # This is an optional output file
+  # All other gffread parameters above are optional input files
+  # All following gffread parameters below are optional parameters to be passed to `gffread`
+gffread_dupinfo: ""
+
+# Extra parameters for gffread
+gffread_extra: ""
+
+
+
+##### LINKS TO SNAKEMAKE WRAPPERS USED #####
+  # Can be useful to see how optional parameters get passed to these tools
+
+# bwa-mem2 wrappers: https://snakemake-wrappers.readthedocs.io/en/stable/wrappers/bwa-mem2.html
+  # BWA-MEM2 INDEX and BWA-MEM2 used
+
+# bowtie2 wrapeprs: https://snakemake-wrappers.readthedocs.io/en/stable/wrappers/bowtie2.html
+  # Both available wrappers used
+
+# samtools sort wrapper: https://snakemake-wrappers.readthedocs.io/en/stable/wrappers/samtools/sort.html
+
+# fastp wrapper: https://snakemake-wrappers.readthedocs.io/en/stable/wrappers/fastp.html
+
+# fastqc wrapper: https://snakemake-wrappers.readthedocs.io/en/stable/wrappers/fastqc.html
+
+# gffread wrapper: https://snakemake-wrappers.readthedocs.io/en/stable/wrappers/gffread.html
+
+# salmon wrappers: 

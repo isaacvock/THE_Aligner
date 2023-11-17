@@ -31,6 +31,8 @@ container: "docker://continuumio/miniconda3"
 include: "rules/common.smk"
 include: "rules/postprocess.smk"
 include: "rules/preprocess.smk"
+include: "rules/coverage/smk"
+
 
 if config["aligner"] == "bwa-mem2":
     include: "rules/bwamem2.smk"
@@ -85,5 +87,5 @@ else:
         input:
             expand("results/fastqc/{SID}_{read}.html", SID = SAMP_NAMES, read = READ_NAMES),
             expand("results/fastqc/{SID}_{read}_fastqc.zip", SID = SAMP_NAMES, read = READ_NAMES),
-            expand("results/alignment_stats/{SID}.bamstats", SID = SAMP_NAMES)
-
+            expand("results/alignment_stats/{SID}.bamstats", SID = SAMP_NAMES),
+            expand("results/bigwig/{SID}.bw", SID = SAMP_NAMES)

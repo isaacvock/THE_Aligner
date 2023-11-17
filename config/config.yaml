@@ -214,6 +214,20 @@ salmon_quant_params: ""
 
 
 
+##### BEDTOOLS PARAMETERS (for creating coverage bedGraphs) #####
+
+# Parameters to pass to bedtools genomecov
+genomecov_params: ""
+
+
+
+##### BEDGRAPHTOBIGWIG PARAMETERS #####
+
+# Parameters to pass to bedGraphToBigWig
+bg2bw_params: ""
+
+
+
 ##### GFFREAD PARAMETERS (for creating transcriptome.fasta) #####
   # See http://ccb.jhu.edu/software/stringtie/gff.shtml#gffread for details
 

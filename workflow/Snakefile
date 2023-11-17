@@ -31,7 +31,7 @@ container: "docker://continuumio/miniconda3"
 include: "rules/common.smk"
 include: "rules/postprocess.smk"
 include: "rules/preprocess.smk"
-include: "rules/coverage/smk"
+include: "rules/coverage.smk"
 
 
 if config["aligner"] == "bwa-mem2":

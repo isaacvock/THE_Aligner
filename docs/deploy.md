@@ -22,6 +22,10 @@ cd path/to/working/directory
 conda activate deploy_snakemake
 snakedeploy deploy-workflow https://github.com/isaacvock/THE_Aligner.git . --branch main
 
+###
+# EDIT CONFIG FILE (need to do once for each new dataset)
+###
+
 # RUN PIPELINE
 
 # See [here](https://snakemake.readthedocs.io/en/stable/executing/cli.html) for details on all of the configurable parameters

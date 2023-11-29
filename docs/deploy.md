@@ -1,13 +1,6 @@
-# Setup
+# Deploying THE_Aligner
 
-There are 4 steps required to get up and running with THE_Aligner
-
-1. [Install conda (or mamba) on your system](#conda). This is the package manager that THE_Aligner uses to make setting up the necessary dependencies a breeze.
-1. [Deploy workflow](#deploy) with [Snakedeploy](https://snakedeploy.readthedocs.io/en/latest/index.html)
-1. [Edit the config file](#config) (located in config/ directory of deployed/cloned repo) to your liking
-1. [Run it!](#run)
-
-The remaining documentation on this page will describe each of these steps in greater detail and point you to additional documentation that might be useful.
+This page provides instructions for running THE_Aligner. The Quickstart section includes a code block that succinctly lays out all of the required steps. The Setup section goes into more detail about each step touched upon in the Quickstart.
 
 ## Quickstart
 
@@ -34,6 +27,17 @@ snakedeploy deploy-workflow https://github.com/isaacvock/THE_Aligner.git . --bra
 # See [here](https://snakemake.readthedocs.io/en/stable/executing/cli.html) for details on all of the configurable parameters
 snakemake --cores all --use-conda 
 ```
+
+## Setup
+
+There are 4 steps required to get up and running with THE_Aligner
+
+1. [Install conda (or mamba) on your system](#conda). This is the package manager that THE_Aligner uses to make setting up the necessary dependencies a breeze.
+1. [Deploy workflow](#deploy) with [Snakedeploy](https://snakedeploy.readthedocs.io/en/latest/index.html)
+1. [Edit the config file](#config) (located in config/ directory of deployed/cloned repo) to your liking
+1. [Run it!](#run)
+
+The remaining documentation on this page will describe each of these steps in greater detail and point you to additional documentation that might be useful.
 
 ### Install conda (or mamba)<a name="conda"></a>
 [Conda](https://docs.conda.io/projects/conda/en/latest/index.html) is a package/environment management system. [Mamba](https://mamba.readthedocs.io/en/latest/) is a newer, faster, C++ reimplementation of conda. While often associated with Python package management, lots of software, including all of the THE_Aligner pipeline dependencies, can be installed with these package managers. They have pretty much the same syntax and can do the same things, so I highly suggest using Mamba in place of Conda whenever possible. 

@@ -1,0 +1,3 @@
+# Tips and Snakemake Information
+
+Documentation for another Snakemake pipeline I developed (PROseq_etal), includes a [section](https://proseq-etal.readthedocs.io/en/latest/pragmatism/) detailing some helpful advice when running Snakemake pipelines, as well as advice specific to running these pipelines on Yale's HPC clusters. There are also details about the general architecture of Snakemake pipelines for those interested.

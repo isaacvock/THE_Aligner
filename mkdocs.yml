@@ -1,0 +1,18 @@
+site_name: THE_Aligner
+site_url: https://example.come/
+nav:
+  - Introduction: index.md
+  - Running THE_Aligner: deploy.md
+  - THE_Aligner on Yale HPC: simon.md
+  - Alternative deployment strategies: alt.md
+  - Output: output.md
+  - General information: pragmatism.md
+  - FAQs: pitfalls.md
+theme: readthedocs
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets

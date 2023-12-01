@@ -1,5 +1,5 @@
 # THE_Aligner
-Align almost any kind of RNA-seq data. Makes use of the workflow manager Snakemake. Extensive documentation is available [here](https://the-aligner.readthedocs.io/en/latest/deploy/#quickstart).
+Align almost any kind of RNA-seq data. Makes use of the workflow manager Snakemake. Extensive documentation is available [here](https://pipelinedocs.readthedocs.io/en/latest/).
 
 THE_Aligner implements the following aligners/pseudoaligners:
 

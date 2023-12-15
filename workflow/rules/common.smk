@@ -51,13 +51,9 @@ INDEX_KALLISTO = os.path.join(INDEX_DIR, "transcriptome.idx")
 # Trimmed fastq file paths, used as input for aligners
 
 def get_fastq_r1(wildcards):
-    if config["PE"]:
 
-        return expand("results/trimmed/{SID}.1.fastq", SID = wildcards.sample)
+    return expand("results/trimmed/{SID}.1.fastq", SID = wildcards.sample)
 
-    else:
-
-        return expand("results/trimmed/{SID}.fastq", SID = wildcards.sample)
 
 def get_fastq_r2(wildcards):
     if config["PE"]:

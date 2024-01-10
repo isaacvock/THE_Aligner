@@ -11,7 +11,7 @@ if is_gz:
             "logs/unzip/{sample}.log"
         conda:
             "../envs/pigz.yaml"
-        threads: 10
+        threads: 3
         script:
             "../scripts/pigz.py"
 

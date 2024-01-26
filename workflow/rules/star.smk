@@ -3,7 +3,7 @@ rule index:
         fasta=config["genome"],
         gtf=config["annotation"],
     output:
-        directory(config['indices']),
+        directory(config["indices"]),
     threads: 12
     params:
         extra=config["star_index_params"],
@@ -15,9 +15,9 @@ rule index:
 
 rule align:
     input:
-        fq1 = get_fastq_r1,
-        fq2 = get_fastq_r2,
-        index = config['indices'],
+        fq1=get_fastq_r1,
+        fq2=get_fastq_r2,
+        index=config["indices"],
     output:
         aln="results/align/{sample}.bam",
         sj="results/align/{sample}-SJ.out.tab",
@@ -31,14 +31,12 @@ rule align:
         reads_per_gene=lambda wc: "GeneCounts" in config["star_align_params"],
         chim_junc=lambda wc: "--chimOutType Junctions" in config["star_align_params"],
         idx=lambda wc, input: input.index,
-        extra="{} {}".format(
-            SJ_DB_GTF, config["star_align_params"]
-        ),
+        extra="{} {}".format(SJ_DB_GTF, config["star_align_params"]),
         out_reads_per_gene="results/align/{sample}-ReadsPerGene.out.tab",
         out_chim_junc="results/align/{sample}-Chimeric.out.junction",
-        out_aln_tx="results/align/{sample}-Aligned.toTranscriptome.out.bam"
+        out_aln_tx="results/align/{sample}-Aligned.toTranscriptome.out.bam",
     conda:
         "../envs/star.yaml"
     threads: 24
-    script: 
+    script:
         "../scripts/star-align.py"

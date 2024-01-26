@@ -4,7 +4,7 @@ rule index:
         ref=config["genome"],
     output:
         multiext(
-            "{}/genome".format(INDEX_PATH), 
+            "{}/genome".format(INDEX_PATH),
             ".1.bt{}".format(INDEX_SUFFIX),
             ".2.bt{}".format(INDEX_SUFFIX),
             ".3.bt{}".format(INDEX_SUFFIX),
@@ -24,9 +24,9 @@ rule index:
 # Align
 rule align:
     input:
-        sample=expand("results/trimmed/{{sample}}.{read}.fastq", read = READS),
+        sample=expand("results/trimmed/{{sample}}.{read}.fastq", read=READS),
         idx=multiext(
-            "{}/genome".format(INDEX_PATH), 
+            "{}/genome".format(INDEX_PATH),
             ".1.bt{}".format(INDEX_SUFFIX),
             ".2.bt{}".format(INDEX_SUFFIX),
             ".3.bt{}".format(INDEX_SUFFIX),

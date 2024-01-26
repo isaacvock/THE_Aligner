@@ -3,28 +3,21 @@ rule index:
     input:
         config["genome"],
     output:
-        multiext(
-            "{}/genome".format(INDEX_PATH), 
-            ".amb", 
-            ".ann", 
-            ".bwt.2bit.64", 
-            ".pac"),
+        multiext("{}/genome".format(INDEX_PATH), ".amb", ".ann", ".bwt.2bit.64", ".pac"),
     log:
         "logs/index/bwamem2_index.log",
     wrapper:
         "v2.2.1/bio/bwa-mem2/index"
 
+
 # Align
 rule align:
     input:
-        reads=expand("results/trimmed/{{sample}}.{read}.fastq", read = READS),
+        reads=expand("results/trimmed/{{sample}}.{read}.fastq", read=READS),
         # Index can be a list of (all) files created by bwa, or one of them
         idx=multiext(
-            "{}/genome".format(INDEX_PATH), 
-            ".amb", 
-            ".ann", 
-            ".bwt.2bit.64", 
-            ".pac"),
+            "{}/genome".format(INDEX_PATH), ".amb", ".ann", ".bwt.2bit.64", ".pac"
+        ),
     output:
         "results/align/{sample}.bam",
     log:

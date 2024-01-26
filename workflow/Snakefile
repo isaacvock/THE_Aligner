@@ -1,5 +1,3 @@
-
-
 from snakemake.utils import min_version
 
 ##### set minimum snakemake version #####
@@ -35,31 +33,45 @@ include: "rules/coverage.smk"
 
 
 if config["aligner"] == "bwa-mem2":
+
     include: "rules/bwamem2.smk"
 
+
 if config["aligner"] == "bowtie2":
+
     include: "rules/bowtie2.smk"
 
+
 if config["aligner"] == "star":
+
     include: "rules/star.smk"
 
+
 if config["aligner"] == "hisat2":
+
     include: "rules/hisat2.smk"
 
+
 if config["aligner"] == "hisat3n":
+
     include: "rules/hisat3n.smk"
 
+
 if config["aligner"] == "bismark":
+
     include: "rules/bisamrk.smk"
 
+
 if config["aligner"] == "kallisto":
+
     include: "rules/kallisto.smk"
     include: "rules/transcriptome.smk"
 
+
 if config["aligner"] == "salmon":
+
     include: "rules/salmon.smk"
     include: "rules/transcriptome.smk"
-
 
 
 ##### Target rule ######
@@ -68,24 +80,36 @@ if config["aligner"] == "salmon":
 
     rule all:
         input:
-            expand("results/fastqc/{SID}_{read}.html", SID = SAMP_NAMES, read = READ_NAMES),
-            expand("results/fastqc/{SID}_{read}_fastqc.zip", SID = SAMP_NAMES, read = READ_NAMES),
-            expand("results/quant/{SID}/quant.sf", SID = SAMP_NAMES),
-            expand("results/quant/{SID}/lib_format_counts.json", SID = SAMP_NAMES)
+            expand("results/fastqc/{SID}_{read}.html", SID=SAMP_NAMES, read=READ_NAMES),
+            expand(
+                "results/fastqc/{SID}_{read}_fastqc.zip",
+                SID=SAMP_NAMES,
+                read=READ_NAMES,
+            ),
+            expand("results/quant/{SID}/quant.sf", SID=SAMP_NAMES),
+            expand("results/quant/{SID}/lib_format_counts.json", SID=SAMP_NAMES),
 
 elif config["aligner"] == "kallisto":
 
     rule all:
         input:
-            expand("results/fastqc/{SID}_{read}.html", SID = SAMP_NAMES, read = READ_NAMES),
-            expand("results/fastqc/{SID}_{read}_fastqc.zip", SID = SAMP_NAMES, read = READ_NAMES),
-            expand("results/kallisto_quant/{SID}/run_info.json", SID = SAMP_NAMES)
+            expand("results/fastqc/{SID}_{read}.html", SID=SAMP_NAMES, read=READ_NAMES),
+            expand(
+                "results/fastqc/{SID}_{read}_fastqc.zip",
+                SID=SAMP_NAMES,
+                read=READ_NAMES,
+            ),
+            expand("results/kallisto_quant/{SID}/run_info.json", SID=SAMP_NAMES),
 
 else:
 
     rule all:
         input:
-            expand("results/fastqc/{SID}_{read}.html", SID = SAMP_NAMES, read = READ_NAMES),
-            expand("results/fastqc/{SID}_{read}_fastqc.zip", SID = SAMP_NAMES, read = READ_NAMES),
-            expand("results/alignment_stats/{SID}.bamstats", SID = SAMP_NAMES),
-            expand("results/bigwig/{SID}.bw", SID = SAMP_NAMES)
+            expand("results/fastqc/{SID}_{read}.html", SID=SAMP_NAMES, read=READ_NAMES),
+            expand(
+                "results/fastqc/{SID}_{read}_fastqc.zip",
+                SID=SAMP_NAMES,
+                read=READ_NAMES,
+            ),
+            expand("results/alignment_stats/{SID}.bamstats", SID=SAMP_NAMES),
+            expand("results/bigwig/{SID}.bw", SID=SAMP_NAMES),

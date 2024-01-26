@@ -15,8 +15,8 @@ rule make_transcriptome_fasta:
     log:
         "logs/make_transcriptome_fasta/gffread.log",
     params:
-        extra=config["gffread_extra"]
+        extra=config["gffread_extra"],
     conda:
         "../envs/gffread.yaml"
-    script: 
+    script:
         "../scripts/gffread.py"

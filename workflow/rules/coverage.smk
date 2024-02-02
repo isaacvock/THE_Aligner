@@ -71,7 +71,7 @@ rule deeptools_bamcoverage:
     params:
         extra=config["deeptools_bamcoverage_extra"],
     log:
-        "logs/coverage.log",
+        "logs/deeptools_bamcoverage/{sample}.log",
     threads: 8
     wrapper:
         "v3.3.6/bio/deeptools/bamcoverage"

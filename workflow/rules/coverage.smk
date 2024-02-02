@@ -13,24 +13,41 @@ rule genomecov:
         "v2.2.1/bio/bedtools/genomecov"
 
 
-# # Get chromosome sizes for bigWig creation
-# rule chrom_sizes:
-#     input:
-#         expand("results/sorted_bam/{sample_one}.bam", sample_one=SAMP_NAMES[1]),
-#     output:
-#         "results/genomecov/genome.chrom.sizes",
-#     log:
-#         "logs/chrom_sizes/chrom_sizes.log",
-#     conda:
-#         "../envs/chrom.yaml"
-#     params:
-#         shellscript=workflow.source_path("../scripts/chrom.sh"),
-#     threads: 1
-#     shell:
-#         """
-#         chmod +x {params.shellscript}
-#         {params.shellscript} {input} {output} 1> {log} 2>&1
-#         """
+# Get chromosome sizes for bigWig creation
+rule chrom_sizes:
+    input:
+        expand("results/sorted_bam/{sample_one}.bam", sample_one=SAMP_NAMES[1]),
+    output:
+        "results/genomecov/genome.chrom.sizes",
+    log:
+        "logs/chrom_sizes/chrom_sizes.log",
+    conda:
+        "../envs/chrom.yaml"
+    params:
+        shellscript=workflow.source_path("../scripts/chrom.sh"),
+    threads: 1
+    shell:
+        """
+        chmod +x {params.shellscript}
+        {params.shellscript} {input} {output} 1> {log} 2>&1
+        """
+
+
+# Create tdf files
+rule make_tdf:
+    input:
+        bg="results/genomecov/{sample}.bg",
+        cs="results/genomecov/genome.chrom.sizes",
+    output:
+        "results/TDFs/{sample}.tdf",
+    conda:
+        "../envs/igv.yaml"
+    log:
+        "logs/make_tdf/{sample}.log",
+    shell:
+        """
+        igvtools toTDF -f mean,max {input.bg} {output} {input.cs} 1> {log} 2>&1
+        """
 
 
 # # Sort bedGraph for bigWig creation

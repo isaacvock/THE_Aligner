@@ -133,3 +133,4 @@ else:
             expand("results/alignment_stats/{SID}.bamstats", SID=SAMP_NAMES),
             expand("results/genomecov/{SID}.bg", SID=SAMP_NAMES),
             expand("results/bigwig/{SID}.bw", SID=SAMP_NAMES),
+            expand("results/TDFs/{SID}.tdf", SID=SAMP_NAMES),

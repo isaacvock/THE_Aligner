@@ -233,10 +233,10 @@ genomecov_params: ""
 
 
 
-##### BEDGRAPHTOBIGWIG PARAMETERS #####
+##### DEEPTOOLS BAMCOVERAGE PARAMETERS #####
 
-# Parameters to pass to bedGraphToBigWig
-bg2bw_params: ""
+# Parameters to pass to deeptools bamcoverage
+deeptools_bamcoverage_extra: ""
 
 
 

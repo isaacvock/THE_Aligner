@@ -3,7 +3,7 @@ rule genomecov:
     input:
         "results/sorted_bam/{sample}.bam",
     output:
-        "results/genomecov/{sample}.bg",
+        "results/genomecov/{sample}.bedGraph",
     log:
         "logs/genomecov/{sample}.log",
     params:
@@ -36,7 +36,7 @@ rule chrom_sizes:
 # Create tdf files
 rule make_tdf:
     input:
-        bg="results/genomecov/{sample}.bg",
+        bg="results/genomecov/{sample}.bedGraph",
         cs="results/genomecov/genome.chrom.sizes",
     output:
         "results/TDFs/{sample}.tdf",
@@ -53,9 +53,9 @@ rule make_tdf:
 # # Sort bedGraph for bigWig creation
 # rule sort_bg:
 #     input:
-#         "results/genomecov/{sample}.bg",
+#         "results/genomecov/{sample}.bedGraph",
 #     output:
-#         "results/sort_bg/{sample}.bg",
+#         "results/sort_bg/{sample}.bedGraph",
 #     log:
 #         "logs/sort_bg/{sample}.log",
 #     threads: 1
@@ -66,7 +66,7 @@ rule make_tdf:
 # # Make bigWig's from bedGraphs (compressed bedGraph)
 # rule bg2bw:
 #     input:
-#         bedGraph="results/sort_bg/{sample}.bg",
+#         bedGraph="results/sort_bg/{sample}.bedGraph",
 #         chromsizes="results/genomecov/genome.chrom.sizes",
 #     output:
 #         "results/bigwig/{sample}.bw",

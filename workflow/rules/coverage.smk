@@ -7,7 +7,7 @@ rule genomecov:
     log:
         "logs/genomecov/{sample}.log",
     params:
-        "-bg {}".format(str(config["genomecov_params"])),
+        "-bga {}".format(str(config["genomecov_params"])),
     threads: 1
     wrapper:
         "v2.2.1/bio/bedtools/genomecov"

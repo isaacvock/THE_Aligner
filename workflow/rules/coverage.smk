@@ -62,13 +62,12 @@ rule genomecov:
 #         "v2.2.1/bio/ucsc/bedGraphToBigWig"
 
 
-
 # Make bigWig using deeptools
 rule deeptools_bamcoverage:
     input:
         bam="results/sorted_bam/{sample}.bam",
     output:
-        "results/bigwig/{sample}.bw"
+        "results/bigwig/{sample}.bw",
     params:
         extra=config["deeptools_bamcoverage_extra"],
     log:

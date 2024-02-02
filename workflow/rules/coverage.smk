@@ -62,14 +62,30 @@ rule genomecov:
 #         "v2.2.1/bio/ucsc/bedGraphToBigWig"
 
 
+# Index bam files for deeptools
+rule index_bam:
+    input:
+        "results/sorted_bam/{sample}.bam",
+    output:
+        "results/sorted_bam/{sample}.bam.bai",
+    log:
+        "logs/index_bam/{sample}.log",
+    params:
+        extra=config["samtools_index_params"],
+    threads: 8
+    wrapper:
+        "v3.3.6/bio/samtools/index"
+
+
 # Make bigWig using deeptools
 rule deeptools_bamcoverage:
     input:
         bam="results/sorted_bam/{sample}.bam",
+        bai="results/sorted_bam/{sample}.bam.bai",
     output:
         "results/bigwig/{sample}.bw",
     params:
-        extra=config["deeptools_bamcoverage_extra"],
+        extra=config["deeptools_bamcoverage_params"],
     log:
         "logs/deeptools_bamcoverage/{sample}.log",
     threads: 8

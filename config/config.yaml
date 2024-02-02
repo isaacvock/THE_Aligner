@@ -140,6 +140,8 @@ bwamem2_sort_extra: "" # Extra args for samtools/picard, relevant only if bwamem
 # Optional parameters to set for samtools sort
 samtools_params: ""
 
+# Optional parameters to set for samtools index
+samtools_index_params: ""
 
 
 ##### BAMTOOLS PARAMETERS #####
@@ -236,7 +238,7 @@ genomecov_params: ""
 ##### DEEPTOOLS BAMCOVERAGE PARAMETERS #####
 
 # Parameters to pass to deeptools bamcoverage
-deeptools_bamcoverage_extra: ""
+deeptools_bamcoverage_params: ""
 
 
 

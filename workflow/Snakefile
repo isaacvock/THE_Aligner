@@ -18,8 +18,12 @@ if "sra_accessions" not in config:
 if "download_fastqs" not in config:
     config["download_fastqs"] = False
 
-if "deeptools_bamcoverage_extra" not in config:
-    config["deeptools_bamcoverage_extra"] = ""
+if "deeptools_bamcoverage_params" not in config:
+    config["deeptools_bamcoverage_params"] = ""
+
+if "samtools_index_params" not in config:
+    config["samtools_index_params"] = ""
+
 
 ##### setup report #####
 

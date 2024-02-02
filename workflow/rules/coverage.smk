@@ -77,4 +77,3 @@ rule deeptools_bamcoverage:
         "../envs/deeptools.yaml"
     script:
         "../scripts/deeptools.py"
-

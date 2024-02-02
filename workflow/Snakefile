@@ -38,6 +38,10 @@ include: "rules/postprocess.smk"
 include: "rules/preprocess.smk"
 include: "rules/coverage.smk"
 
+if config["download_fastqs"]:
+
+    include: "rules/sra.smk"
+
 
 if config["aligner"] == "bwa-mem2":
 

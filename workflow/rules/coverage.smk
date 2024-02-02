@@ -54,7 +54,7 @@ rule bg2bw:
     output:
         "results/bigwig/{sample}.bw",
     params:
-        config["bg2bw_params"],
+        extra=config["bg2bw_params"],
     log:
         "logs/bg2bw/{sample}.log",
     threads: 1

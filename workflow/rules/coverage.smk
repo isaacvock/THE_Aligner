@@ -73,5 +73,8 @@ rule deeptools_bamcoverage:
     log:
         "logs/deeptools_bamcoverage/{sample}.log",
     threads: 8
-    wrapper:
-        "v3.3.6/bio/deeptools/bamcoverage"
+    conda:
+        "../envs/deeptools.yaml"
+    script:
+        "../scripts/deeptools.py"
+

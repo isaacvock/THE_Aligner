@@ -9,7 +9,6 @@ if config["PE"]:
         threads: 12
         wrapper:
             "v3.3.6/bio/sra-tools/fasterq-dump"
-    
 
 else:
 
@@ -21,4 +20,3 @@ else:
         threads: 12
         wrapper:
             "v3.3.6/bio/sra-tools/fasterq-dump"
-        

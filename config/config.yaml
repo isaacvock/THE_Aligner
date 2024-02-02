@@ -12,7 +12,16 @@
 ####### PARAMETERS YOU NEED TO SET #######
 
 
-## Paths to fastq containing directories.
+#### FASTQ LOCATIONS ####
+
+# Download fastq files from GEO using SRA accession?
+download_fastqs: False
+
+# If downloading fastqs, provide a list of SRA accession codes:
+sra_accessions: ["SRR24994162", "SRR24994161", "SRR24994160", "SRR24994163", "SRR24994164", "SRR24994165", "SRR24994167", "SRR24994168", "SRR24994169"]
+
+
+# If providing fastq files, paths to fastq containing directories.
   # Fastqs may be either unzipped or gzipped
 samples:
   WT_1: data/fastq/WT_1
@@ -21,6 +30,10 @@ samples:
   KO_1: data/fastq/KO_1
   KO_2: data/fastq/KO_2
   KO_ctl: data/fastq/KO_ctl
+
+
+
+#### DATA DETAILS ####
 
 
 # Paired end? 

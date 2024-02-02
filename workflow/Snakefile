@@ -10,6 +10,13 @@ min_version("6.4.1")
 
 configfile: "config/config.yaml"
 
+# Impute potentially missing parameters
+if "sra_accessions" not in config:
+    config["sra_accessions"] = [""]
+
+if "download_fastqs" not in config:
+    config["download_fastqs"] = False
+
 
 ##### setup report #####
 

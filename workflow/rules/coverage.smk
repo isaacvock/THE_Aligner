@@ -16,7 +16,7 @@ rule genomecov:
 # Get chromosome sizes for bigWig creation
 rule chrom_sizes:
     input:
-        expand("results/sorted_bam/{sample_one}.bam", sample_one=SAMP_NAMES[1]),
+        expand("results/sorted_bam/{sample_one}.bam", sample_one=SAMP_NAMES[0]),
     output:
         "results/genomecov/genome.chrom.sizes",
     log:

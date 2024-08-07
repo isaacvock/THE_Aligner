@@ -31,4 +31,4 @@ rule align:
     conda:
         "../envs/bwamem2.yaml"
     script:
-        "bwamem2.py"
+        "../scripts/bwamem2.py"

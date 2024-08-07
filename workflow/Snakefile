@@ -93,6 +93,11 @@ if config["aligner"] == "salmon":
     include: "rules/transcriptome.smk"
 
 
+if config["aligner"] == "minimap2":
+
+    include: "rules/minimap2/smk"
+
+
 ##### Target rule ######
 
 if config["aligner"] == "salmon":

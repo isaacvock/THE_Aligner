@@ -56,6 +56,32 @@ if not config["download_fastqs"]:
         is_gz = any([is_gz, test_gz])
 
 
+### FASTQC HELPERS
+
+
+def get_fastqc_read(wildcards):
+    if config["skip_trimming"]:
+        if is_gz:
+            return expand(
+                "results/unzipped/{SID}.{READ}.fastq",
+                SID=wildcards.sample,
+                READ=wildcards.read,
+            )
+
+        else:
+            fastq_path = config["samples"][wildcards.sample]
+            fastq_files = sorted(glob.glob(f"{fastq_path}/*.fastq*"))
+            readID = int(wildcards.read)
+            return fastq_files[readID]
+
+    else:
+        return expand(
+            "results/trimmed/{SID}.{READ}.fastq",
+            SID=wildcards.sample,
+            READ=wildcards.read,
+        )
+
+
 ### KALLISTO HELPERS
 
 # Path to index for kallisto
@@ -175,3 +201,17 @@ if config["hisat2_index_base"]:
 
 else:
     HISAT2_BASE = "{}/{}".format(INDEX_PATH, "hisat2_index")
+
+
+### MINIMAP2 HELPERS
+
+minimap2_index = "{}/{}.mmi".format(INDEX_PATH, config["minimap2_index_name"])
+
+
+if config["minimap2_use_annotation"]:
+    MINIMAP2_ALIGN_PARAMS = "{} {} {}".format(
+        config["minimap2_align_params"], "--juncbed", config["minimap2_bedgraph"]
+    )
+
+else:
+    MINIMAP2_ALIGN_PARAMS = config["minimap2_align_params"]

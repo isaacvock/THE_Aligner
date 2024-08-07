@@ -7,7 +7,7 @@ rule index:
     log:
         "logs/index/bwamem2_index.log",
     wrapper:
-        "v2.2.1/bio/bwa-mem2/index"
+        "v3.14.0/bio/bwa-mem2/index"
 
 
 # Align
@@ -28,5 +28,7 @@ rule align:
         sort_order=config["bwamem2_sort_order"],  # Can be 'coordinate' (default) or 'queryname'.
         sort_extra=config["bwamem2_sort_extra"],  # Extra args for samtools/picard.
     threads: 20
-    wrapper:
-        "v2.2.1/bio/bwa-mem2/mem"
+    conda:
+        "../envs/bwamem2.yaml"
+    script:
+        "bwamem2.py"

@@ -205,13 +205,15 @@ else:
 
 ### MINIMAP2 HELPERS
 
-minimap2_index = "{}/{}.mmi".format(INDEX_PATH, config["minimap2_index_name"])
+if config["aligner"] == "minimap2":
+
+    minimap2_index = "{}/{}.mmi".format(INDEX_PATH, config["minimap2_index_name"])
 
 
-if config["minimap2_use_annotation"]:
-    MINIMAP2_ALIGN_PARAMS = "{} {} {}".format(
-        config["minimap2_align_params"], "--juncbed", config["minimap2_bedgraph"]
-    )
+    if config["minimap2_use_annotation"]:
+        MINIMAP2_ALIGN_PARAMS = "{} {} {}".format(
+            config["minimap2_align_params"], "--juncbed", config["minimap2_bedgraph"]
+        )
 
-else:
-    MINIMAP2_ALIGN_PARAMS = config["minimap2_align_params"]
+    else:
+        MINIMAP2_ALIGN_PARAMS = config["minimap2_align_params"]

@@ -206,9 +206,7 @@ else:
 ### MINIMAP2 HELPERS
 
 if config["aligner"] == "minimap2":
-
     minimap2_index = "{}/{}.mmi".format(INDEX_PATH, config["minimap2_index_name"])
-
 
     if config["minimap2_use_annotation"]:
         MINIMAP2_ALIGN_PARAMS = "{} {} {}".format(

@@ -95,7 +95,7 @@ if config["aligner"] == "salmon":
 
 if config["aligner"] == "minimap2":
 
-    include: "rules/minimap2/smk"
+    include: "rules/minimap2/minimap2.smk"
 
 
 ##### Target rule ######

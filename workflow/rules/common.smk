@@ -210,7 +210,7 @@ if config["aligner"] == "minimap2":
 
     if config["minimap2_use_annotation"]:
         MINIMAP2_ALIGN_PARAMS = "{} {} {}".format(
-            config["minimap2_align_params"], "--juncbed", config["minimap2_bedgraph"]
+            config["minimap2_align_params"], "--junc-bed", config["minimap2_bedgraph"]
         )
 
     else:

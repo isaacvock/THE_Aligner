@@ -232,7 +232,7 @@ salmon_quant_params: ""
 ##### BEDTOOLS PARAMETERS (for creating coverage bedGraphs) #####
 
 # Parameters to pass to bedtools genomecov
-genomecov_params: ""
+genomecov_params: "-split"
 
 
 

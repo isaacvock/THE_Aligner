@@ -243,6 +243,14 @@ deeptools_bamcoverage_params: ""
 
 
 
+
+##### FASTERQDUMP PARAMETERS ######
+
+# Parameters to pass to fasterq-dump if download_fastqs is True
+fasterq_dump_extras: ""
+
+
+
 ##### GFFREAD PARAMETERS (for creating transcriptome.fasta) #####
   # See http://ccb.jhu.edu/software/stringtie/gff.shtml#gffread for details
 
